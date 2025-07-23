@@ -6,25 +6,19 @@ export default function Footer() {
           {/* Lab Info */}
           <div className="mb-6">
             <div className="text-2xl font-bold mb-4">IST Lab</div>
-            <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-blue-200">
-              <span>Information Science & Technology Laboratory</span>
-              <span>•</span>
-              <span>국립군산대학교 소프트웨어학과</span>
-              <span>•</span>
-              <span>정보과학기술 분야 연구</span>
+            <div className="text-center text-sm text-blue-200 space-y-2">
+              <div>Information Science & Technology Laboratory</div>
+              <div>국립 군산대학교 소프트웨어학과</div>
+              <div>정보과학기술 분야 연구</div>
             </div>
           </div>
 
           {/* Contact Info */}
           <div className="mb-8">
-            <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-blue-200">
-              <span>전북특별자치도 군산시 대학로 558</span>
-              <span>•</span>
-              <span>디지털정보관 1층 151-107</span>
-              <span>•</span>
-              <span>Tel: 063-469-8912</span>
-              <span>•</span>
-              <span>Email: istlab@kunsan.ac.kr</span>
+            <div className="text-center text-sm text-blue-200 space-y-1">
+              <div>전북특별자치도 군산시 대학로 558</div>
+              <div>디지털정보관 1층 151-107</div>
+              <div>Tel: 063-469-8912</div>
             </div>
           </div>
         </div>
