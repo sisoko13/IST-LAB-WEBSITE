@@ -114,20 +114,6 @@ export default function MembersSection() {
             </div>
           ))}
         </div>
-
-        {/* Join Us Section */}
-        <div className="mt-16 bg-blue-50 rounded-lg p-8 text-center">
-          <h3 className="text-2xl font-bold text-blue-700 mb-4">Join Our Team</h3>
-          <p className="text-gray-700 mb-6">IST Lab에서 함께 연구하고 성장할 새로운 연구원을 모집합니다.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition-colors">
-              대학원생 모집 정보
-            </button>
-            <button className="border border-blue-700 text-blue-700 px-6 py-3 rounded-lg hover:bg-blue-700 hover:text-white transition-colors">
-              학부연구생 지원
-            </button>
-          </div>
-        </div>
       </div>
     </section>
   )

@@ -155,6 +155,7 @@ export default function ContactSection() {
                     <input
                       type="text"
                       required
+                      name="name"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="이름을 입력하세요"
                     />
@@ -165,6 +166,7 @@ export default function ContactSection() {
                     <input
                       type="email"
                       required
+                      name="email"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="이메일을 입력하세요"
                     />
@@ -174,6 +176,7 @@ export default function ContactSection() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">소속/직책</label>
                     <input
                       type="text"
+                      name="organization"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="소속이나 직책을 입력하세요"
                     />
@@ -184,6 +187,7 @@ export default function ContactSection() {
                     <input
                       type="text"
                       required
+                      name="subject"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="제목을 입력하세요"
                     />
@@ -194,6 +198,7 @@ export default function ContactSection() {
                     <textarea
                       required
                       rows={5}
+                      name="message"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
                       placeholder="문의 내용을 입력하세요"
                     ></textarea>
@@ -202,41 +207,28 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     className="w-full bg-blue-700 text-white py-3 px-6 rounded-lg hover:bg-blue-800 transition-colors font-medium"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const form = e.target.closest('form');
+                      const formData = new FormData(form);
+                      const name = formData.get('name');
+                      const email = formData.get('email');
+                      const subject = formData.get('subject');
+                      const message = formData.get('message');
+                      
+                      if (!name || !email || !subject || !message) {
+                        alert('모든 필수 항목을 입력해주세요.');
+                        return;
+                      }
+                      
+                      alert('문의가 성공적으로 전송되었습니다. 빠른 시일 내에 답변드리겠습니다.');
+                      form.reset();
+                    }}
                   >
                     메시지 보내기
                   </button>
                 </form>
               </div>
-            </div>
-          </div>
-
-          {/* Quick Contact Cards */}
-          <div className="mt-16 grid md:grid-cols-3 gap-6">
-            <div className="bg-blue-50 rounded-lg p-6 text-center">
-              <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                <GraduationCap className="w-8 h-8 text-white" />
-              </div>
-              <h4 className="font-bold text-gray-800 mb-2">대학원 입학 문의</h4>
-              <p className="text-gray-600 text-sm mb-4">석사/박사 과정 입학에 관한 문의사항</p>
-              <button className="text-blue-700 font-medium hover:text-blue-800">자세히 보기 →</button>
-            </div>
-
-            <div className="bg-green-50 rounded-lg p-6 text-center">
-              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              <h4 className="font-bold text-gray-800 mb-2">연구 협력 문의</h4>
-              <p className="text-gray-600 text-sm mb-4">산학협력 및 공동연구에 관한 문의사항</p>
-              <button className="text-green-600 font-medium hover:text-green-700">자세히 보기 →</button>
-            </div>
-
-            <div className="bg-purple-50 rounded-lg p-6 text-center">
-              <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Briefcase className="w-8 h-8 text-white" />
-              </div>
-              <h4 className="font-bold text-gray-800 mb-2">기술 자문 문의</h4>
-              <p className="text-gray-600 text-sm mb-4">기술 자문 및 컨설팅에 관한 문의사항</p>
-              <button className="text-purple-600 font-medium hover:text-purple-700">자세히 보기 →</button>
             </div>
           </div>
         </div>

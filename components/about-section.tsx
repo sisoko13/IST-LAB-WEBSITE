@@ -38,21 +38,21 @@ export default function AboutSection() {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-blue-700 text-white p-6 rounded-lg">
+            <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg border">
               <div className="flex items-center mb-3">
                 <Lightbulb className="w-6 h-6 mr-3" />
                 <h4 className="text-xl font-bold">연구 철학</h4>
               </div>
               <p>실용적이고 현장 중심적인 연구를 통해 사회에 기여하는 기술 개발</p>
             </div>
-            <div className="bg-blue-500 text-white p-6 rounded-lg">
+            <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg border">
               <div className="flex items-center mb-3">
                 <Target className="w-6 h-6 mr-3" />
                 <h4 className="text-xl font-bold">연구 목표</h4>
               </div>
               <p>정보과학기술 분야의 혁신적 솔루션 개발 및 기술 사업화</p>
             </div>
-            <div className="bg-blue-800 text-white p-6 rounded-lg">
+            <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg border">
               <div className="flex items-center mb-3">
                 <Globe className="w-6 h-6 mr-3" />
                 <h4 className="text-xl font-bold">비전</h4>
