@@ -167,7 +167,7 @@ export default function NewsSection() {
                     className="w-full flex-shrink-0 relative cursor-pointer"
                     onClick={() => handleNewsClick(item)}
                   >
-                    <div className="relative h-96 overflow-hidden">
+                    <div className="relative h-[500px] overflow-hidden">
                       <img
                         src={item.image || "/placeholder.svg"}
                         alt={item.title}
