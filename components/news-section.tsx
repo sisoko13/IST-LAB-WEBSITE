@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Calendar, User, ArrowRight } from "lucide-react"
+import { Calendar, User, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import NewsModal from "./news-modal"
 
 interface NewsItem {
@@ -111,8 +111,20 @@ export default function NewsSection() {
     setSelectedNews(null)
   }
 
-  const featuredNews = news.filter((item) => item.featured)
-  const regularNews = news.filter((item) => !item.featured)
+  // 시간순으로 정렬 (최신순)
+  const sortedNews = [...news].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const itemsPerView = 3
+  const maxIndex = Math.max(0, sortedNews.length - itemsPerView)
+
+  const nextSlide = () => {
+    setCurrentIndex(prev => Math.min(prev + 1, maxIndex))
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex(prev => Math.max(prev - 1, 0))
+  }
 
   return (
     <section className="py-16 px-4 bg-gray-50">
@@ -123,102 +135,87 @@ export default function NewsSection() {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">IST Lab의 최신 연구 성과와 소식을 확인하세요.</p>
         </div>
 
-        {/* Featured News */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-bold text-gray-800 mb-6">주요 소식</h3>
-          <div className="grid md:grid-cols-2 gap-8">
-            {featuredNews.map((item) => (
-              <div
-                key={item.id}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
-                onClick={() => handleNewsClick(item)}
-              >
-                {/* News Image */}
-                {item.image && (
-                  <div className="h-48 overflow-hidden">
-                    <img
-                      src={item.image || "/placeholder.svg"}
-                      alt={item.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                )}
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(item.category)}`}>
-                      {item.category}
-                    </span>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {item.date}
-                    </div>
-                  </div>
-                  <h4 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">{item.title}</h4>
-                  <p className="text-gray-600 mb-4 line-clamp-3">{item.summary}</p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <User className="w-4 h-4 mr-1" />
-                      {item.author}
-                    </div>
-                    <button className="flex items-center text-blue-700 hover:text-blue-800 font-medium">
-                      자세히 보기
-                      <ArrowRight className="w-4 h-4 ml-1" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Regular News */}
-        <div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-6">전체 소식</h3>
-          <div className="bg-white rounded-lg shadow-lg">
-            {regularNews.map((item, index) => (
-              <div
-                key={item.id}
-                className={`p-6 hover:bg-gray-50 transition-colors cursor-pointer ${
-                  index !== regularNews.length - 1 ? "border-b border-gray-200" : ""
-                }`}
-                onClick={() => handleNewsClick(item)}
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center mb-2">
-                      <span className={`px-2 py-1 rounded text-xs font-medium mr-3 ${getCategoryColor(item.category)}`}>
-                        {item.category}
-                      </span>
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {item.date}
+        {/* News Carousel */}
+        <div className="relative">
+          <div className="overflow-hidden">
+            <div 
+              className="flex transition-transform duration-300 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
+            >
+              {sortedNews.map((item) => (
+                <div
+                  key={item.id}
+                  className="w-1/3 flex-shrink-0 px-4"
+                >
+                  <div
+                    className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer h-full"
+                    onClick={() => handleNewsClick(item)}
+                  >
+                    {/* News Image */}
+                    {item.image && (
+                      <div className="h-48 overflow-hidden">
+                        <img
+                          src={item.image || "/placeholder.svg"}
+                          alt={item.title}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(item.category)}`}>
+                          {item.category}
+                        </span>
+                        <div className="flex items-center text-sm text-gray-500">
+                          <Calendar className="w-4 h-4 mr-1" />
+                          {item.date}
+                        </div>
+                      </div>
+                      <h4 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">{item.title}</h4>
+                      <p className="text-gray-600 mb-4 line-clamp-3">{item.summary}</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center text-sm text-gray-500">
+                          <User className="w-4 h-4 mr-1" />
+                          {item.author}
+                        </div>
+                        <button className="flex items-center text-blue-700 hover:text-blue-800 font-medium">
+                          자세히 보기
+                          <ArrowRight className="w-4 h-4 ml-1" />
+                        </button>
                       </div>
                     </div>
-                    <h4 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h4>
-                    <p className="text-gray-600 mb-2">{item.summary}</p>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <User className="w-4 h-4 mr-1" />
-                      {item.author}
-                    </div>
-                  </div>
-                  {/* Small thumbnail for regular news */}
-                  {item.image && (
-                    <div className="mt-4 md:mt-0 md:ml-6">
-                      <img
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.title}
-                        className="w-full md:w-24 h-16 object-cover rounded-lg"
-                      />
-                    </div>
-                  )}
-                  <div className="mt-4 md:mt-0 md:ml-6">
-                    <button className="flex items-center text-blue-700 hover:text-blue-800 font-medium">
-                      자세히 보기
-                      <ArrowRight className="w-4 h-4 ml-1" />
-                    </button>
                   </div>
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Buttons */}
+          <button
+            onClick={prevSlide}
+            disabled={currentIndex === 0}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronLeft className="w-6 h-6 text-gray-600" />
+          </button>
+          <button
+            onClick={nextSlide}
+            disabled={currentIndex >= maxIndex}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronRight className="w-6 h-6 text-gray-600" />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-colors ${
+                  currentIndex === index ? 'bg-blue-700' : 'bg-gray-300'
+                }`}
+              />
             ))}
           </div>
         </div>
