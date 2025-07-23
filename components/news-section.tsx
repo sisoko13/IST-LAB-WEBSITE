@@ -18,6 +18,7 @@ interface NewsItem {
 export default function NewsSection() {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [currentFeaturedIndex, setCurrentFeaturedIndex] = useState(0)
 
   const news: NewsItem[] = [
     {
@@ -111,12 +112,28 @@ export default function NewsSection() {
     setSelectedNews(null)
   }
 
-  // 시간순으로 정렬 (최신순)
-  const sortedNews = [...news].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  // 주요 소식과 전체 소식 분리
+  const featuredNews = news.filter(item => item.featured).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const allNews = news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+  // 주요소식 캐러셀 네비게이션
+  const nextFeaturedSlide = () => {
+    setCurrentFeaturedIndex(prev => (prev + 1) % featuredNews.length)
+  }
+
+  const prevFeaturedSlide = () => {
+    setCurrentFeaturedIndex(prev => (prev - 1 + featuredNews.length) % featuredNews.length)
+  }
+
+  // 자동 슬라이드 (5초마다)
+  React.useEffect(() => {
+    const interval = setInterval(nextFeaturedSlide, 5000)
+    return () => clearInterval(interval)
+  }, [featuredNews.length])
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const itemsPerView = 3
-  const maxIndex = Math.max(0, sortedNews.length - itemsPerView)
+  const maxIndex = Math.max(0, allNews.length - itemsPerView)
 
   const nextSlide = () => {
     setCurrentIndex(prev => Math.min(prev + 1, maxIndex))
@@ -135,14 +152,89 @@ export default function NewsSection() {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">IST Lab의 최신 연구 성과와 소식을 확인하세요.</p>
         </div>
 
-        {/* News Carousel */}
+        {/* 주요 소식 - 사진 캐러셀 */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold text-blue-700 mb-8 text-center">주요 소식</h3>
+          <div className="relative max-w-4xl mx-auto">
+            <div className="overflow-hidden rounded-lg">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentFeaturedIndex * 100}%)` }}
+              >
+                {featuredNews.map((item) => (
+                  <div
+                    key={item.id}
+                    className="w-full flex-shrink-0 relative cursor-pointer"
+                    onClick={() => handleNewsClick(item)}
+                  >
+                    <div className="relative h-96 overflow-hidden">
+                      <img
+                        src={item.image || "/placeholder.svg"}
+                        alt={item.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                      {/* 오버레이 */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                      {/* 텍스트 오버레이 */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <div className="flex items-center mb-2">
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium mr-3 ${getCategoryColor(item.category)}`}>
+                            {item.category}
+                          </span>
+                          <span className="text-sm opacity-90">{item.date}</span>
+                        </div>
+                        <h4 className="text-2xl font-bold mb-2">{item.title}</h4>
+                        <p className="text-sm opacity-90 line-clamp-2">{item.summary}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 주요소식 네비게이션 버튼 */}
+            {featuredNews.length > 1 && (
+              <>
+                <button
+                  onClick={prevFeaturedSlide}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                >
+                  <ChevronLeft className="w-6 h-6 text-gray-600" />
+                </button>
+                <button
+                  onClick={nextFeaturedSlide}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                >
+                  <ChevronRight className="w-6 h-6 text-gray-600" />
+                </button>
+
+                {/* 주요소식 인디케이터 */}
+                <div className="flex justify-center mt-4 space-x-2">
+                  {featuredNews.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentFeaturedIndex(index)}
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        currentFeaturedIndex === index ? 'bg-blue-700' : 'bg-gray-300'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* 전체 소식 */}
+        <div>
+          <h3 className="text-2xl font-bold text-blue-700 mb-8 text-center">전체 소식</h3>
         <div className="relative">
           <div className="overflow-hidden">
             <div 
               className="flex transition-transform duration-300 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
             >
-              {sortedNews.map((item) => (
+              {allNews.map((item) => (
                 <div
                   key={item.id}
                   className="w-1/3 flex-shrink-0 px-4"
@@ -208,7 +300,7 @@ export default function NewsSection() {
 
           {/* Dots Indicator */}
           <div className="flex justify-center mt-6 space-x-2">
-            {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+            {maxIndex > 0 && Array.from({ length: maxIndex + 1 }).map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
@@ -218,6 +310,7 @@ export default function NewsSection() {
               />
             ))}
           </div>
+        </div>
         </div>
       </div>
 
