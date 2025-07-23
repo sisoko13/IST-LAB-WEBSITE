@@ -229,89 +229,41 @@ export default function NewsSection() {
         {/* 전체 소식 */}
         <div>
           <h3 className="text-2xl font-bold text-blue-700 mb-8 text-center">전체 소식</h3>
-        <div className="relative">
-          <div className="overflow-hidden">
-            <div 
-              className="flex transition-transform duration-300 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
-            >
-              {allNews.map((item) => (
-                <div
-                  key={item.id}
-                  className="w-1/3 flex-shrink-0 px-4"
-                >
-                  <div
-                    className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer h-full"
-                    onClick={() => handleNewsClick(item)}
-                  >
-                    {/* News Image */}
-                    {item.image && (
-                      <div className="h-48 overflow-hidden">
-                        <img
-                          src={item.image || "/placeholder.svg"}
-                          alt={item.title}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(item.category)}`}>
-                          {item.category}
-                        </span>
-                        <div className="flex items-center text-sm text-gray-500">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          {item.date}
-                        </div>
-                      </div>
-                      <h4 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">{item.title}</h4>
-                      <p className="text-gray-600 mb-4 line-clamp-3">{item.summary}</p>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center text-sm text-gray-500">
-                          <User className="w-4 h-4 mr-1" />
-                          {item.author}
-                        </div>
-                        <button className="flex items-center text-blue-700 hover:text-blue-800 font-medium">
-                          자세히 보기
-                          <ArrowRight className="w-4 h-4 ml-1" />
-                        </button>
+          <div className="space-y-6">
+            {allNews.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer"
+                onClick={() => handleNewsClick(item)}
+              >
+                <div className="flex flex-col md:flex-row md:items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center mb-3">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium mr-3 ${getCategoryColor(item.category)}`}>
+                        {item.category}
+                      </span>
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {item.date}
                       </div>
                     </div>
+                    <h4 className="text-xl font-bold text-blue-700 mb-3">{item.title}</h4>
+                    <p className="text-gray-600 mb-2">{item.summary}</p>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <User className="w-4 h-4 mr-1" />
+                      {item.author}
+                    </div>
+                  </div>
+                  <div className="mt-4 md:mt-0 md:ml-6">
+                    <button className="flex items-center text-blue-700 hover:text-blue-800 font-medium">
+                      자세히 보기
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation Buttons */}
-          <button
-            onClick={prevSlide}
-            disabled={currentIndex === 0}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-600" />
-          </button>
-          <button
-            onClick={nextSlide}
-            disabled={currentIndex >= maxIndex}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <ChevronRight className="w-6 h-6 text-gray-600" />
-          </button>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center mt-6 space-x-2">
-            {maxIndex > 0 && Array.from({ length: maxIndex + 1 }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  currentIndex === index ? 'bg-blue-700' : 'bg-gray-300'
-                }`}
-              />
+              </div>
             ))}
           </div>
-        </div>
         </div>
       </div>
 
