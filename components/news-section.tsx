@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import { useState } from "react"
 import { Calendar, User, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import NewsModal from "./news-modal"
