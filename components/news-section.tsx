@@ -155,7 +155,6 @@ export default function NewsSection() {
 
         {/* 주요 소식 - 사진 캐러셀 */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold text-blue-700 mb-8 text-center">주요 소식</h3>
           <div className="relative max-w-4xl mx-auto">
             <div className="overflow-hidden rounded-lg">
               <div 
