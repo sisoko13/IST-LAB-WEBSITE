@@ -7,6 +7,7 @@ export default function MembersSection() {
     image: "/placeholder.svg?height=300&width=240",
     research: "정보과학기술, Database",
     email: "professor@kunsan.ac.kr",
+    homepage: "https://sites.google.com/site/withimp/home/teaching?authuser=0",
   }
 
   const members = [
@@ -68,6 +69,16 @@ export default function MembersSection() {
                   <div className="flex items-center justify-center">
                     <Mail className="w-4 h-4 mr-2" />
                     <span>{professor.email}</span>
+                  </div>
+                  <div className="flex items-center justify-center mt-4">
+                    <a
+                      href={professor.homepage}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors text-sm font-medium"
+                    >
+                      [홈페이지]
+                    </a>
                   </div>
                 </div>
               </div>
