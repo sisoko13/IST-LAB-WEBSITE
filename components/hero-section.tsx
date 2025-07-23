@@ -9,9 +9,6 @@ export default function HeroSection() {
         </div>
         <h1 className="text-5xl md:text-6xl font-bold mb-4">IST Lab</h1>
         <h2 className="text-2xl md:text-3xl mb-6 opacity-90">Information Science & Technology Laboratory</h2>
-        <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-80 leading-relaxed">
-          
-        </p>
       </div>
     </section>
   )
