@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import Navigation from "@/components/navigation"
 import HeroSection from "@/components/hero-section"
