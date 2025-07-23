@@ -49,7 +49,7 @@ export default function NewsSection() {
       date: "2024-11-28",
       author: "박사과정 연구원",
       category: "논문",
-      featured: false,
+      featured: true,
       image: "/placeholder.svg?height=400&width=600",
     },
     {
