@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import Navigation from "@/components/navigation"
 import HeroSection from "@/components/hero-section"
@@ -10,7 +8,7 @@ import PublicationsSection from "@/components/publications-section"
 import ContactSection from "@/components/contact-section"
 import Footer from "@/components/footer"
 
-export default function HomePage() {
+function ClientHomePage() {
   const [activeSection, setActiveSection] = useState("home")
 
   return (
@@ -29,4 +27,8 @@ export default function HomePage() {
       <Footer />
     </div>
   )
+}
+
+export default function HomePage() {
+  return <ClientHomePage />
 }
