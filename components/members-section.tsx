@@ -48,34 +48,34 @@ export default function MembersSection() {
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-blue-700 mb-8 text-center">Professor</h3>
           <div className="flex justify-center">
-            <div className="bg-white rounded-lg shadow-xl p-8 max-w-sm">
+            <div className="bg-white rounded-lg shadow-xl p-10 max-w-md">
               <div className="text-center">
-                <div className="w-48 h-60 mx-auto mb-6 overflow-hidden rounded-lg">
+                <div className="w-56 h-72 mx-auto mb-8 overflow-hidden rounded-lg">
                   <img
                     src={professor.image || "/placeholder.svg"}
                     alt={professor.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h4 className="text-2xl font-bold text-gray-800 mb-2">{professor.name}</h4>
-                <p className="text-blue-600 font-medium mb-4">{professor.title}</p>
-                <div className="space-y-2 text-sm text-gray-600">
+                <h4 className="text-3xl font-bold text-gray-800 mb-3">{professor.name}</h4>
+                <p className="text-blue-600 font-medium mb-6">{professor.title}</p>
+                <div className="space-y-3 text-base text-gray-600">
                   <div className="flex items-center justify-center">
-                    <GraduationCap className="w-4 h-4 mr-2" />
+                    <GraduationCap className="w-5 h-5 mr-3" />
                     <span>
                       <strong>연구 분야:</strong> {professor.research}
                     </span>
                   </div>
                   <div className="flex items-center justify-center">
-                    <Mail className="w-4 h-4 mr-2" />
+                    <Mail className="w-5 h-5 mr-3" />
                     <span>{professor.email}</span>
                   </div>
-                  <div className="flex items-center justify-center mt-4">
+                  <div className="flex items-center justify-center mt-6">
                     <a
                       href={professor.homepage}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors text-sm font-medium"
+                      className="bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition-colors text-base font-medium"
                     >
                       [홈페이지]
                     </a>
@@ -96,26 +96,26 @@ export default function MembersSection() {
                 {category.people.map((person, personIndex) => (
                   <div
                     key={personIndex}
-                    className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow"
+                    className="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow"
                   >
-                    <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                    <div className="w-32 h-32 mx-auto mb-6 overflow-hidden rounded-full">
                       <img
                         src={person.image || "/placeholder.svg"}
                         alt={person.name}
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <h5 className="text-lg font-bold text-blue-700 mb-2">{person.name}</h5>
-                    <p className="text-gray-600 mb-3">{category.category}</p>
-                    <div className="space-y-1 text-sm text-gray-600">
+                    <h5 className="text-xl font-bold text-blue-700 mb-3">{person.name}</h5>
+                    <p className="text-gray-600 mb-4">{category.category}</p>
+                    <div className="space-y-2 text-base text-gray-600">
                       <div className="flex items-center justify-center">
-                        <GraduationCap className="w-4 h-4 mr-2" />
+                        <GraduationCap className="w-5 h-5 mr-3" />
                         <span>
                           <strong>연구 분야:</strong> {person.research}
                         </span>
                       </div>
                       <div className="flex items-center justify-center">
-                        <Mail className="w-4 h-4 mr-2" />
+                        <Mail className="w-5 h-5 mr-3" />
                         <span>{person.email}</span>
                       </div>
                     </div>
