@@ -8,8 +8,6 @@ export default function Footer() {
             <div className="text-2xl font-bold mb-4">IST Lab</div>
             <div className="text-center text-sm text-blue-200 space-y-2">
               <div>Information Science & Technology Laboratory</div>
-              <div>국립 군산대학교 소프트웨어학과</div>
-              <div>정보과학기술 분야 연구</div>
             </div>
           </div>
 
