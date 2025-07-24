@@ -1,81 +1,122 @@
 "use client"
 
-import { BookOpen, Award, FileText } from "lucide-react"
+import { useState } from "react"
+import { ChevronDown, ExternalLink, FileText } from "lucide-react"
 
 export default function PublicationsSection() {
-  const publications = [
-    {
-      id: 1,
-      type: "journal",
-      title: "정보과학기술 분야의 혁신적 접근법에 관한 연구",
-      authors: "정동원, 박사과정 연구원, 석사과정 연구원",
-      venue: "한국정보과학회 논문지, Vol. 50, No. 12, pp. 1234-1245",
-      year: "2024",
-      badge: "학술지",
-    },
-    {
-      id: 2,
-      type: "conference",
-      title: "AI 기반 데이터 분석 시스템 개발",
-      authors: "박사과정 연구원, 정동원",
-      venue: "2024 한국컴퓨터종합학술대회 (KCC 2024)",
-      year: "2024",
-      badge: "학회",
-    },
-    {
-      id: 3,
-      type: "project",
-      title: "지능형 정보처리 시스템 및 그 방법",
-      authors: "정동원, 박사과정 연구원",
-      venue: "출원번호: 10-2024-0123456",
-      year: "2024",
-      badge: "특허",
-    },
-    {
-      id: 4,
-      type: "conference",
-      title: "소프트웨어 품질 향상을 위한 새로운 방법론",
-      authors: "석사과정 연구원, 정동원",
-      venue: "2024 한국소프트웨어공학회 춘계학술대회",
-      year: "2024",
-      badge: "학회",
-    },
-    {
-      id: 5,
-      type: "journal",
-      title: "빅데이터 환경에서의 효율적인 질의 처리 기법",
-      authors: "정동원, 박사과정 연구원",
-      venue: "IEEE Transactions on Knowledge and Data Engineering, Vol. 35, No. 8",
-      year: "2023",
-      badge: "국제학술지",
-    },
-    {
-      id: 6,
-      type: "project",
-      title: "스마트 시티 데이터 플랫폼 구축",
-      authors: "IST Lab",
-      venue: "과학기술정보통신부 지원 과제",
-      year: "2023-2025",
-      badge: "프로젝트",
-    },
-  ]
+  const [selectedCategory, setSelectedCategory] = useState("해외학술지")
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
-  const getBadgeColor = (badge: string) => {
-    switch (badge) {
-      case "학술지":
-        return "bg-blue-100 text-blue-800"
-      case "국제학술지":
-        return "bg-green-100 text-green-800"
-      case "학회":
-        return "bg-purple-100 text-purple-800"
-      case "특허":
-        return "bg-yellow-100 text-yellow-800"
-      case "프로젝트":
-        return "bg-red-100 text-red-800"
-      default:
-        return "bg-gray-100 text-gray-800"
-    }
+  const categories = ["해외학술지", "국내학술지", "해외학술대회", "국내학술대회"]
+
+  const publications = {
+    "해외학술지": [
+      {
+        id: 1,
+        title: "Efficient Query Processing in Distributed Big Data Environments",
+        authors: "정동원, 박사과정 연구원",
+        venue: "IEEE Transactions on Knowledge and Data Engineering",
+        volume: "Vol. 35, No. 8",
+        pages: "pp. 1567-1580",
+        year: "2023",
+        doi: "10.1109/TKDE.2023.1234567",
+        paperUrl: "https://ieeexplore.ieee.org/document/example",
+        image: "/placeholder.svg?height=200&width=150"
+      },
+      {
+        id: 2,
+        title: "Machine Learning Approaches for Database Optimization",
+        authors: "박사과정 연구원, 정동원",
+        venue: "ACM Transactions on Database Systems",
+        volume: "Vol. 48, No. 3",
+        pages: "pp. 1-28",
+        year: "2023",
+        doi: "10.1145/3589334.3589335",
+        paperUrl: "https://dl.acm.org/doi/example",
+        image: "/placeholder.svg?height=200&width=150"
+      }
+    ],
+    "국내학술지": [
+      {
+        id: 3,
+        title: "정보과학기술 분야의 혁신적 접근법에 관한 연구",
+        authors: "정동원, 박사과정 연구원, 석사과정 연구원",
+        venue: "한국정보과학회 논문지",
+        volume: "Vol. 50, No. 12",
+        pages: "pp. 1234-1245",
+        year: "2024",
+        doi: "10.5626/KTCP.2024.50.12.1234",
+        paperUrl: "https://www.dbpia.co.kr/journal/example",
+        image: "/placeholder.svg?height=200&width=150"
+      },
+      {
+        id: 4,
+        title: "클라우드 환경에서의 분산 데이터 처리 최적화",
+        authors: "석사과정 연구원, 정동원",
+        venue: "정보처리학회논문지",
+        volume: "Vol. 12, No. 4",
+        pages: "pp. 156-167",
+        year: "2023",
+        doi: "10.3745/KTSDE.2023.12.4.156",
+        paperUrl: "https://www.kci.go.kr/kciportal/example",
+        image: "/placeholder.svg?height=200&width=150"
+      }
+    ],
+    "해외학술대회": [
+      {
+        id: 5,
+        title: "Efficient Query Processing in Distributed Big Data Environments",
+        authors: "정동원, 박사과정 연구원",
+        venue: "IEEE International Conference on Data Engineering (ICDE 2024)",
+        location: "Utrecht, Netherlands",
+        date: "May 13-17, 2024",
+        year: "2024",
+        pages: "pp. 567-578",
+        paperUrl: "https://ieeexplore.ieee.org/conference/example",
+        image: "/placeholder.svg?height=200&width=150"
+      },
+      {
+        id: 6,
+        title: "Machine Learning Approaches for Database Optimization",
+        authors: "정동원, 박사과정 연구원, 석사과정 연구원",
+        venue: "ACM SIGMOD International Conference on Management of Data",
+        location: "Seattle, WA, USA",
+        date: "June 18-23, 2023",
+        year: "2023",
+        pages: "pp. 1456-1468",
+        paperUrl: "https://dl.acm.org/conference/example",
+        image: "/placeholder.svg?height=200&width=150"
+      }
+    ],
+    "국내학술대회": [
+      {
+        id: 7,
+        title: "AI 기반 데이터 분석 시스템 개발",
+        authors: "박사과정 연구원, 정동원",
+        venue: "2024 한국컴퓨터종합학술대회 (KCC 2024)",
+        location: "제주국제컨벤션센터",
+        date: "2024년 6월 26-28일",
+        year: "2024",
+        pages: "pp. 1234-1236",
+        paperUrl: "https://www.kiise.or.kr/conference/example",
+        image: "/placeholder.svg?height=200&width=150"
+      },
+      {
+        id: 8,
+        title: "소프트웨어 품질 향상을 위한 새로운 방법론",
+        authors: "석사과정 연구원, 정동원",
+        venue: "2024 한국소프트웨어공학회 춘계학술대회",
+        location: "강원대학교",
+        date: "2024년 5월 23-24일",
+        year: "2024",
+        pages: "pp. 89-92",
+        paperUrl: "https://www.kiise.or.kr/conference/example",
+        image: "/placeholder.svg?height=200&width=150"
+      }
+    ]
   }
+
+  const currentPublications = publications[selectedCategory] || []
 
   return (
     <section className="py-16 px-4 bg-gray-50">
@@ -83,38 +124,127 @@ export default function PublicationsSection() {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-blue-700 mb-4">Publications</h2>
           <div className="w-24 h-1 bg-blue-700 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">IST Lab에서 발표한 논문과 연구 성과를 소개합니다.</p>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            IST Lab에서 발표한 논문과 연구 성과를 소개합니다.
+          </p>
+        </div>
+
+        {/* Category Dropdown */}
+        <div className="mb-8 flex justify-center">
+          <div className="relative">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="flex items-center bg-white border border-gray-300 rounded-lg px-6 py-3 text-lg font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-48"
+            >
+              {selectedCategory}
+              <ChevronDown className={`ml-2 w-5 h-5 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {isDropdownOpen && (
+              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => {
+                      setSelectedCategory(category)
+                      setIsDropdownOpen(false)
+                    }}
+                    className={`w-full text-left px-6 py-3 hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg ${
+                      selectedCategory === category ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Publications List */}
-        <div className="space-y-6">
-          {publications.map((pub) => (
+        <div className="space-y-8">
+          {currentPublications.map((pub) => (
             <div key={pub.id} className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-              <div className="flex flex-col md:flex-row md:items-start justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center mb-3">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium mr-3 ${getBadgeColor(pub.badge)}`}>
-                      {pub.badge}
-                    </span>
-                    <span className="text-sm text-gray-500">{pub.year}</span>
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Paper Image */}
+                <div className="flex-shrink-0">
+                  <div className="w-40 h-52 bg-gray-100 rounded-lg overflow-hidden border">
+                    <img
+                      src={pub.image || "/placeholder.svg"}
+                      alt={`${pub.title} paper`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h3 className="text-xl font-bold text-blue-700 mb-3">{pub.title}</h3>
-                  <p className="text-gray-600 mb-2">
-                    <strong>저자:</strong> {pub.authors}
-                  </p>
-                  <p className="text-gray-600">
-                    <strong>게재지:</strong> {pub.venue}
-                  </p>
                 </div>
-                <div className="mt-4 md:mt-0 md:ml-6">
-                  <button className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">
-                    자세히 보기
-                  </button>
+
+                {/* Paper Details */}
+                <div className="flex-1">
+                  <div className="mb-4">
+                    <h3 className="text-xl font-bold text-blue-700 mb-3 leading-tight">
+                      {pub.title}
+                    </h3>
+                    <p className="text-gray-600 mb-2">
+                      <strong>저자:</strong> {pub.authors}
+                    </p>
+                    <p className="text-gray-600 mb-2">
+                      <strong>게재지:</strong> {pub.venue}
+                      {pub.volume && `, ${pub.volume}`}
+                      {pub.pages && `, ${pub.pages}`}
+                    </p>
+                    {pub.location && (
+                      <p className="text-gray-600 mb-2">
+                        <strong>장소:</strong> {pub.location}
+                      </p>
+                    )}
+                    {pub.date && (
+                      <p className="text-gray-600 mb-2">
+                        <strong>일시:</strong> {pub.date}
+                      </p>
+                    )}
+                    {pub.doi && (
+                      <p className="text-gray-600 mb-2">
+                        <strong>DOI:</strong> {pub.doi}
+                      </p>
+                    )}
+                    <p className="text-gray-600">
+                      <strong>연도:</strong> {pub.year}
+                    </p>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href={pub.paperUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                    >
+                      <FileText className="w-4 h-4 mr-2" />
+                      Paper
+                    </a>
+                    <a
+                      href={pub.paperUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center border border-blue-700 text-blue-700 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Link
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
+        {/* Empty State */}
+        {currentPublications.length === 0 && (
+          <div className="text-center py-12">
+            <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-500 text-lg">해당 카테고리에 논문이 없습니다.</p>
+          </div>
+        )}
       </div>
     </section>
   )
