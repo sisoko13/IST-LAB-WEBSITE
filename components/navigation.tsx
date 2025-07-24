@@ -23,12 +23,12 @@ export default function Navigation() {
 
   const activeSection = getActiveSection()
   const menuItems = [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "news", label: "News" },
-    { id: "members", label: "Members" },
-    { id: "publications", label: "Publications" },
-    { id: "contact", label: "Contact" },
+    { id: "home", label: "Home", path: "/" },
+    { id: "about", label: "About", path: "/about" },
+    { id: "news", label: "News", path: "/news" },
+    { id: "members", label: "Members", path: "/members" },
+    { id: "publications", label: "Publications", path: "/publications" },
+    { id: "contact", label: "Contact", path: "/contact" },
   ]
 
   return (
@@ -49,7 +49,7 @@ export default function Navigation() {
             {menuItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => setActiveSection(item.id)}
+                onClick={() => router.push(item.path)}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
                 }`}
@@ -81,7 +81,7 @@ export default function Navigation() {
                 <button
                   key={item.id}
                   onClick={() => {
-                    setActiveSection(item.id)
+                    router.push(item.path)
                     setIsMobileMenuOpen(false)
                   }}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
