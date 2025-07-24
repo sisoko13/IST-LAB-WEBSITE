@@ -15,7 +15,6 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const categories = ["All", "해외학술지", "국내학술지", "해외학술대회", "국내학술대회"]
-  const categories = ["All", "Journal", "Conference"]
   const years = ["All", "2025", "2024", "2023", "2022", "2021", "2020", "2019"]
 
   const publications = {
