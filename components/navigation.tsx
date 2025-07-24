@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation"
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
 
   const pathname = usePathname()
   const router = useRouter()
@@ -14,7 +15,7 @@ export default function Navigation() {
   const getActiveSection = () => {
     if (pathname === '/') return 'home'
     if (pathname.startsWith('/about')) return 'about'
-    if (pathname.startsWith('/news')) return 'news'
+    if (pathname.startsWith('/board')) return 'board'
     if (pathname.startsWith('/members')) return 'members'
     if (pathname.startsWith('/publications')) return 'publications'
     if (pathname.startsWith('/contact')) return 'contact'
@@ -22,14 +23,57 @@ export default function Navigation() {
   }
 
   const activeSection = getActiveSection()
+  
   const menuItems = [
     { id: "home", label: "Home", path: "/" },
-    { id: "about", label: "About", path: "/about" },
-    { id: "news", label: "News", path: "/news" },
-    { id: "members", label: "Members", path: "/members" },
-    { id: "publications", label: "Publications", path: "/publications" },
+    { 
+      id: "about", 
+      label: "About", 
+      path: "/about",
+      dropdown: [
+        { label: "Lab Info", path: "/about" },
+        { label: "Research Areas", path: "/about#research" },
+      ]
+    },
+    { 
+      id: "board", 
+      label: "Board", 
+      path: "/board",
+      dropdown: [
+        { label: "News", path: "/board/news" },
+        { label: "Gallery", path: "/board/gallery" },
+      ]
+    },
+    { 
+      id: "members", 
+      label: "Members", 
+      path: "/members",
+      dropdown: [
+        { label: "Professor", path: "/members#professor" },
+        { label: "Researchers", path: "/members#researchers" },
+      ]
+    },
+    { 
+      id: "publications", 
+      label: "Publications", 
+      path: "/publications",
+      dropdown: [
+        { label: "Journal Papers", path: "/publications/journal" },
+        { label: "Conference Papers", path: "/publications/conference" },
+        { label: "Patents", path: "/publications/patents" },
+        { label: "Projects", path: "/publications/projects" },
+      ]
+    },
     { id: "contact", label: "Contact", path: "/contact" },
   ]
+
+  const handleMouseEnter = (itemId: string) => {
+    setOpenDropdown(itemId)
+  }
+
+  const handleMouseLeave = () => {
+    setOpenDropdown(null)
+  }
 
   return (
     <nav className="fixed top-0 w-full bg-blue-900 text-white shadow-lg z-50">
@@ -39,6 +83,7 @@ export default function Navigation() {
           <div className="flex items-center">
             <button
               className="text-xl font-bold hover:text-blue-300 transition-colors"
+              onClick={() => router.push("/")}
             >
               IST Lab
             </button>
@@ -47,15 +92,56 @@ export default function Navigation() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             {menuItems.map((item) => (
-              <button
+              <div
                 key={item.id}
-                onClick={() => router.push(item.path)}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
-                }`}
+                className="relative"
+                onMouseEnter={() => item.dropdown && handleMouseEnter(item.id)}
+                onMouseLeave={handleMouseLeave}
               >
-                {item.label}
-              </button>
+                <button
+                  onClick={() => router.push(item.path)}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </button>
+                
+                {/* Dropdown Menu */}
+                {item.dropdown && openDropdown === item.id && (
+                  <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                  <div key={item.id}>
+                    <button
+                      onClick={() => {
+                        router.push(item.path)
+                        setIsMobileMenuOpen(false)
+                      }}
+                      className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                        activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                    {/* Mobile Dropdown */}
+                    {item.dropdown && (
+                      <div className="ml-4 space-y-1">
+                        {item.dropdown.map((dropdownItem, index) => (
+                          <button
+                            key={index}
+                            onClick={() => {
+                              router.push(dropdownItem.path)
+                              setIsMobileMenuOpen(false)
+                            }}
+                            className="block px-3 py-2 text-sm text-blue-200 hover:text-white transition-colors"
+                          >
+                            {dropdownItem.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
 
