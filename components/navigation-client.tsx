@@ -34,7 +34,7 @@ export default function Navigation() {
       dropdown: [
         { label: "Professor", path: "/members/professor" },
         { label: "Researchers", path: "/members/researchers" },
-        { label: "Graduates", path: "/members/graduates" },
+        { label: "Alumni", path: "/members/graduates" },
       ]
     },
     { 

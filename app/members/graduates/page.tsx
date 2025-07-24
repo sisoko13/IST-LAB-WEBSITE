@@ -24,7 +24,7 @@ export default function GraduatesPage() {
     <section className="py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-blue-700 mb-4">Graduates</h2>
+          <h2 className="text-4xl font-bold text-blue-700 mb-4">Alumni</h2>
           <div className="w-24 h-1 bg-blue-700 mx-auto mb-6"></div>
         </div>
 
