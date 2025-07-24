@@ -84,13 +84,13 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="fixed top-0 w-full bg-blue-900 text-white z-50 shadow-lg">
+    <nav className="fixed top-0 w-full bg-blue-900 text-white z-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
             <button
-              className="text-xl font-bold hover:text-blue-300 transition-colors"
+              className="text-xl font-bold hover:text-blue-300 transition-colors focus:outline-none"
               onClick={() => router.push("/")}
             >
               IST Lab
@@ -126,7 +126,7 @@ export default function Navigation() {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2">
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 focus:outline-none">
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -134,7 +134,7 @@ export default function Navigation() {
 
         {/* Full Width Dropdown Menu */}
         {openDropdown && (
-          <div className="absolute left-0 right-0 top-full bg-blue-800 shadow-lg z-50 animate-dropdown">
+          <div className="absolute left-0 right-0 top-full bg-blue-800 z-50 animate-dropdown">
             <div className="max-w-7xl mx-auto px-4 py-6">
               <div className="grid grid-cols-6 gap-8">
                 {menuItems.map((item) => (
@@ -151,7 +151,7 @@ export default function Navigation() {
                               router.push(dropdownItem.path)
                               setOpenDropdown(null)
                             }}
-                            className="block text-blue-200 hover:text-white transition-colors text-sm"
+                            className="block text-blue-200 hover:text-white transition-colors text-sm focus:outline-none"
                           >
                             {dropdownItem.label}
                           </button>
