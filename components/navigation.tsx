@@ -53,6 +53,7 @@ export default function Navigation() {
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
                 }`}
+              >
                 {item.label}
               </button>
             ))}
@@ -83,6 +84,7 @@ export default function Navigation() {
                     setActiveSection(item.id)
                     setIsMobileMenuOpen(false)
                   }}
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
                   }`}
                 >
