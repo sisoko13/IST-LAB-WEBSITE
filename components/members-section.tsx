@@ -41,7 +41,6 @@ export default function MembersSection() {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-blue-700 mb-4">Members</h2>
           <div className="w-24 h-1 bg-blue-700 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">IST Lab의 우수한 연구원들을 소개합니다.</p>
         </div>
 
         {/* Professor Section */}

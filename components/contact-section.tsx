@@ -43,9 +43,6 @@ export default function ContactSection() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-blue-700 mb-4">Contact</h2>
             <div className="w-24 h-1 bg-blue-700 mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              IST Lab에 문의사항이 있으시면 언제든지 연락해 주세요.
-            </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-stretch">

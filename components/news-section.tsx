@@ -121,7 +121,6 @@ export default function NewsSection() {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-blue-700 mb-4">News & Updates</h2>
           <div className="w-24 h-1 bg-blue-700 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">IST Lab의 최신 연구 성과와 소식을 확인하세요.</p>
         </div>
 
         {/* 소식 목록 */}
