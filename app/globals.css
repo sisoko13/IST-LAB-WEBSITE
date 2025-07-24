@@ -57,10 +57,10 @@ html {
 }
 
 /* 모든 카드와 박스에 둥근 모서리 적용 */
-.bg-white,
-.shadow-lg,
-.shadow-xl,
-.border {
+.bg-white:not(nav *),
+.shadow-lg:not(nav *),
+.shadow-xl:not(nav *),
+.border:not(nav *) {
   border-radius: 1rem !important;
 }
 
@@ -70,9 +70,9 @@ button:not(nav button) {
 }
 
 /* 입력 필드들도 둥글게 */
-input,
-textarea,
-select {
+input:not(nav input),
+textarea:not(nav textarea),
+select:not(nav select) {
   border-radius: 0.75rem !important;
 }
 
