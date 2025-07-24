@@ -7,6 +7,10 @@ import AboutSection from "@/components/about-section"
 import NewsSection from "@/components/news-section"
 import MembersSection from "@/components/members-section"
 import PublicationsSection from "@/components/publications-section"
+import JournalPapersSection from "@/components/journal-papers-section"
+import ConferencePapersSection from "@/components/conference-papers-section"
+import PatentsSection from "@/components/patents-section"
+import ProjectsSection from "@/components/projects-section"
 import ContactSection from "@/components/contact-section"
 import Footer from "@/components/footer"
 
@@ -23,6 +27,10 @@ export default function ClientHomePage() {
         {activeSection === "news" && <NewsSection />}
         {activeSection === "members" && <MembersSection />}
         {activeSection === "publications" && <PublicationsSection />}
+        {activeSection === "publications-journal" && <JournalPapersSection />}
+        {activeSection === "publications-conference" && <ConferencePapersSection />}
+        {activeSection === "publications-patents" && <PatentsSection />}
+        {activeSection === "publications-projects" && <ProjectsSection />}
         {activeSection === "contact" && <ContactSection />}
       </main>
 
