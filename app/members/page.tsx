@@ -1,5 +1,5 @@
-import MembersSection from "@/components/members-section"
+import { redirect } from 'next/navigation'
 
 export default function MembersPage() {
-  return <MembersSection />
+  redirect('/members/professor')
 }
