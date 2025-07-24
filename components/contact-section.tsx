@@ -2,7 +2,6 @@
 
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { useEffect, useRef } from "react"
-import { useEffect, useRef } from "react"
 
 export default function ContactSection() {
   const mapRef = useRef<HTMLDivElement>(null)
