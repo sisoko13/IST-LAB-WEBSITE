@@ -1,11 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, ExternalLink, FileText } from "lucide-react"
+import { ChevronDown, ExternalLink, FileText, X } from "lucide-react"
 
 export default function PublicationsSection() {
   const [selectedCategory, setSelectedCategory] = useState("해외학술지")
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const categories = ["해외학술지", "국내학술지", "해외학술대회", "국내학술대회"]
 
@@ -172,7 +173,8 @@ export default function PublicationsSection() {
                     <img
                       src={pub.image || "/placeholder.svg"}
                       alt={`${pub.title} paper`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity"
+                      onClick={() => setSelectedImage(pub.image || "/placeholder.svg")}
                     />
                   </div>
                 </div>
@@ -184,30 +186,30 @@ export default function PublicationsSection() {
                       {pub.title}
                     </h3>
                     <p className="text-gray-600 mb-2">
-                      <strong>저자:</strong> {pub.authors}
+                      {pub.authors}
                     </p>
                     <p className="text-gray-600 mb-2">
-                      <strong>게재지:</strong> {pub.venue}
+                      {pub.venue}
                       {pub.volume && `, ${pub.volume}`}
                       {pub.pages && `, ${pub.pages}`}
                     </p>
                     {pub.location && (
                       <p className="text-gray-600 mb-2">
-                        <strong>장소:</strong> {pub.location}
+                        {pub.location}
                       </p>
                     )}
                     {pub.date && (
                       <p className="text-gray-600 mb-2">
-                        <strong>일시:</strong> {pub.date}
+                        {pub.date}
                       </p>
                     )}
                     {pub.doi && (
                       <p className="text-gray-600 mb-2">
-                        <strong>DOI:</strong> {pub.doi}
+                        {pub.doi}
                       </p>
                     )}
                     <p className="text-gray-600">
-                      <strong>연도:</strong> {pub.year}
+                      {pub.year}
                     </p>
                   </div>
 
@@ -243,6 +245,25 @@ export default function PublicationsSection() {
           <div className="text-center py-12">
             <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
             <p className="text-gray-500 text-lg">해당 카테고리에 논문이 없습니다.</p>
+          </div>
+        )}
+
+        {/* Image Modal */}
+        {selectedImage && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+            <div className="relative max-w-4xl max-h-full">
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors"
+              >
+                <X className="w-8 h-8" />
+              </button>
+              <img
+                src={selectedImage}
+                alt="Paper preview"
+                className="max-w-full max-h-full object-contain rounded-lg"
+              />
+            </div>
           </div>
         )}
       </div>
