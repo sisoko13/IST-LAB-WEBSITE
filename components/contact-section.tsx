@@ -1,78 +1,12 @@
 "use client"
 
-import { MapPin, Phone, Mail, Clock, GraduationCap, Users, Briefcase } from "lucide-react"
+import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { useEffect, useRef } from "react"
-import Script from "next/script"
 
 export default function ContactSection() {
-  const mapRef = useRef<HTMLDivElement>(null)
-
-  const initializeMap = () => {
-    if (mapRef.current && window.naver && window.naver.maps) {
-      // 기존 좌표 (잘못된 위치)
-      // const location = new window.naver.maps.LatLng(35.9676, 126.737)
-
-      // 군산대학교 디지털정보관 정확한 좌표로 변경
-      const location = new window.naver.maps.LatLng(35.94467188450771, 126.68290730277084)
-
-      // 만약 여전히 정확하지 않다면 다음 좌표들을 시도해보세요:
-
-      // 옵션 1: 군산대학교 메인 캠퍼스
-      // const location = new window.naver.maps.LatLng(35.9676, 126.7370)
-
-      // 옵션 2: 조금 더 정확한 디지털정보관 위치
-      // const location = new window.naver.maps.LatLng(35.9680, 126.7375)
-
-      const map = new window.naver.maps.Map(mapRef.current, {
-        center: location,
-        zoom: 16,
-        mapTypeControl: true,
-      })
-
-      // 마커 추가
-      const marker = new window.naver.maps.Marker({
-        position: location,
-        map: map,
-        title: "IST 연구실",
-      })
-
-      // 정보창 추가
-      const infoWindow = new window.naver.maps.InfoWindow({
-        content: `
-          <div style="padding: 10px; font-size: 12px;">
-            <strong>IST 연구실</strong><br/>
-            전북특별자치도 군산시 대학로 558<br/>
-            디지털정보관 1층 151-107
-          </div>
-        `,
-      })
-
-      // 마커 클릭 시 정보창 표시
-      window.naver.maps.Event.addListener(marker, "click", () => {
-        if (infoWindow.getMap()) {
-          infoWindow.close()
-        } else {
-          infoWindow.open(map, marker)
-        }
-      })
-    }
-  }
-
-  useEffect(() => {
-    // 스크립트가 이미 로드되어 있다면 바로 초기화
-    if (window.naver && window.naver.maps) {
-      initializeMap()
-    }
-  }, [])
 
   return (
     <>
-      {/* 🔥 변경된 부분: ncpClientId → ncpKeyId */}
-      <Script
-        src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
-        onLoad={initializeMap}
-      />
-
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -134,13 +68,15 @@ export default function ContactSection() {
                   </div>
                 </div>
 
-                {/* Naver Map */}
+                {/* 지도 영역 (단순 표시) */}
                 <div className="mt-8">
-                  <div
-                    ref={mapRef}
-                    className="w-full h-96 bg-gray-200 rounded-lg"
-                    style={{ minHeight: "384px", aspectRatio: "1/1" }}
-                  />
+                  <div className="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
+                    <div className="text-center text-gray-600">
+                      <MapPin className="w-12 h-12 mx-auto mb-2" />
+                      <p className="font-semibold">IST 연구실</p>
+                      <p className="text-sm">디지털정보관 1층 151-107</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -237,9 +173,3 @@ export default function ContactSection() {
   )
 }
 
-// TypeScript 타입 선언
-declare global {
-  interface Window {
-    naver: any
-  }
-}

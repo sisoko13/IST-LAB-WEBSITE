@@ -1,11 +1,8 @@
 "use client"
 
-import { useState } from "react"
 import { BookOpen, Award, FileText } from "lucide-react"
 
 export default function PublicationsSection() {
-  const [activeTab, setActiveTab] = useState("all")
-
   const publications = [
     {
       id: 1,
@@ -63,15 +60,6 @@ export default function PublicationsSection() {
     },
   ]
 
-  const tabs = [
-    { id: "all", label: "All", icon: BookOpen },
-    { id: "journal", label: "학술지", icon: FileText },
-    { id: "conference", label: "Conference", icon: Award },
-    { id: "project", label: "Project", icon: BookOpen },
-  ]
-
-  const filteredPublications = activeTab === "all" ? publications : publications.filter((pub) => pub.type === activeTab)
-
   const getBadgeColor = (badge: string) => {
     switch (badge) {
       case "학술지":
@@ -98,28 +86,9 @@ export default function PublicationsSection() {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">IST Lab에서 발표한 논문과 연구 성과를 소개합니다.</p>
         </div>
 
-        {/* Tabs */}
-        <div className="flex flex-wrap justify-center mb-8 bg-white rounded-lg p-2 shadow-lg max-w-2xl mx-auto">
-          {tabs.map((tab) => {
-            const IconComponent = tab.icon
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors ${
-                  activeTab === tab.id ? "bg-blue-700 text-white" : "text-gray-600 hover:text-blue-700"
-                }`}
-              >
-                <IconComponent className="w-4 h-4 mr-2" />
-                {tab.label}
-              </button>
-            )
-          })}
-        </div>
-
         {/* Publications List */}
         <div className="space-y-6">
-          {filteredPublications.map((pub) => (
+          {publications.map((pub) => (
             <div key={pub.id} className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
               <div className="flex flex-col md:flex-row md:items-start justify-between">
                 <div className="flex-1">
