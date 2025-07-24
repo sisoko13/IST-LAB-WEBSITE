@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
 
 export default function HeroSection() {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null)
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   
   const heroImages = [
     {
@@ -29,6 +30,15 @@ export default function HeroSection() {
     }
   ]
 
+  // 자동 슬라이드 효과
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
+    }, 4000) // 4초마다 변경
+
+    return () => clearInterval(interval)
+  }, [heroImages.length])
+
   const openModal = (index: number) => {
     setSelectedImageIndex(index)
   }
@@ -49,15 +59,73 @@ export default function HeroSection() {
     }
   }
 
+  const nextSlide = () => {
+    setCurrentSlideIndex((currentSlideIndex + 1) % heroImages.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlideIndex((currentSlideIndex - 1 + heroImages.length) % heroImages.length)
+  }
+
   return (
     <>
       <section className="min-h-screen bg-gradient-to-br from-blue-900 to-blue-700 flex items-center justify-center">
-        <div className="text-center text-white px-4 max-w-4xl">
+        <div className="text-center text-white px-4 max-w-6xl w-full">
+          {/* 슬라이드쇼 섹션 */}
+          <div className="mb-12">
+            <div className="relative w-full max-w-4xl mx-auto">
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                {/* 슬라이드 이미지 */}
+                <div className="relative w-full h-full">
+                  <img
+                    src={heroImages[currentSlideIndex].src}
+                    alt={heroImages[currentSlideIndex].caption}
+                    className="w-full h-full object-cover cursor-pointer"
+                    onClick={() => openModal(currentSlideIndex)}
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+                  <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-center">
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      {heroImages[currentSlideIndex].caption}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* 이전/다음 버튼 */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+
+                {/* 인디케이터 */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {heroImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlideIndex(index)}
+                      className={`w-3 h-3 rounded-full transition-all ${
+                        index === currentSlideIndex 
+                          ? 'bg-white' 
+                          : 'bg-white bg-opacity-50 hover:bg-opacity-75'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 제목 섹션 */}
           <div className="mb-8">
-            <div 
-              className="w-32 h-32 mx-auto mb-6 bg-white rounded-full flex items-center justify-center shadow-2xl cursor-pointer hover:scale-105 transition-transform"
-              onClick={() => openModal(0)}
-            >
+            <div className="w-32 h-32 mx-auto mb-6 bg-white rounded-full flex items-center justify-center shadow-2xl">
               <div className="text-blue-900 text-6xl font-bold">IST</div>
             </div>
           </div>
