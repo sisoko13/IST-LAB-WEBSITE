@@ -1,3 +1,5 @@
+"use client"
+
 import { Mail, GraduationCap } from "lucide-react"
 
 export default function MembersSection() {
