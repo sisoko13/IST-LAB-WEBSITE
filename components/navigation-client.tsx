@@ -26,7 +26,18 @@ export default function Navigation() {
   
   const menuItems = [
     { id: "home", label: "Home", path: "/" },
-    { id: "about", label: "About", path: "/about" },
+    { 
+      id: "about", 
+      label: "About", 
+      path: "/about",
+      dropdown: [
+        { label: "인사말", path: "/about" },
+        { label: "비전 및 연혁", path: "/about" },
+        { label: "Research Areas", path: "/about" },
+        { label: "Career Map", path: "/about" },
+        { label: "Lectures", path: "/about" },
+      ]
+    },
     { 
       id: "members", 
       label: "Members", 
@@ -34,28 +45,43 @@ export default function Navigation() {
       dropdown: [
         { label: "Professor", path: "/members/professor" },
         { label: "Researchers", path: "/members/researchers" },
-        { label: "Alumni", path: "/members/graduates" },
+        { label: "IST Alumni", path: "/members/graduates" },
       ]
     },
     { 
-      id: "publications", 
-      label: "Publications", 
+      id: "research", 
+      label: "Research", 
       path: "/publications",
       dropdown: [
-        { label: "Journal", path: "/publications?category=Journal" },
-        { label: "Conference", path: "/publications?category=Conference" },
+        { label: "Projects", path: "/publications/projects" },
+        { label: "Publications", path: "/publications" },
       ]
     },
     { 
-      id: "board", 
-      label: "Board", 
+      id: "notice", 
+      label: "Notice", 
       path: "/board",
       dropdown: [
         { label: "News", path: "/board/news" },
+      ]
+    },
+    { 
+      id: "gallery", 
+      label: "Gallery", 
+      path: "/board/gallery",
+      dropdown: [
+        { label: "Photo", path: "/board/gallery" },
+        { label: "Video", path: "/board/gallery" },
+      ]
+    },
+    { 
+      id: "contact", 
+      label: "Contact", 
+      path: "/contact",
+      dropdown: [
         { label: "Gallery", path: "/board/gallery" },
       ]
     },
-    { id: "contact", label: "Contact", path: "/contact" },
   ]
 
   const handleMouseEnter = (itemId: string) => {
@@ -100,12 +126,12 @@ export default function Navigation() {
                 
                 {/* Dropdown Menu */}
                 {item.dropdown && openDropdown === item.id && (
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                  <div className="absolute top-full left-0 w-48 bg-blue-800 shadow-lg py-2 z-50 animate-dropdown">
                     {item.dropdown.map((dropdownItem, index) => (
                       <button
                         key={index}
                         onClick={() => router.push(dropdownItem.path)}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                        className="block w-full text-left px-4 py-3 text-sm text-blue-200 hover:text-white hover:bg-blue-700 transition-colors"
                       >
                         {dropdownItem.label}
                       </button>
