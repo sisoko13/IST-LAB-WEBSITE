@@ -65,7 +65,7 @@ html {
 }
 
 /* 버튼들도 둥글게 */
-button {
+button:not(nav button) {
   border-radius: 0.75rem !important;
 }
 
