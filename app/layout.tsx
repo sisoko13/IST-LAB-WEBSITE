@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import dynamic from 'next/dynamic'
 import './globals.css'
 import Footer from '@/components/footer'
@@ -26,12 +25,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <Script
-          src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID || 'demo'}`}
-          strategy="beforeInteractive"
-        />
-      </head>
       <body>
         <Navigation />
         <main className="pt-16">
