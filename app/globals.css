@@ -56,6 +56,26 @@ html {
   animation: fadeInUp 0.6s ease-out;
 }
 
+/* 모든 카드와 박스에 둥근 모서리 적용 */
+.bg-white,
+.shadow-lg,
+.shadow-xl,
+.border {
+  border-radius: 1rem !important;
+}
+
+/* 버튼들도 둥글게 */
+button {
+  border-radius: 0.75rem !important;
+}
+
+/* 입력 필드들도 둥글게 */
+input,
+textarea,
+select {
+  border-radius: 0.75rem !important;
+}
+
 /* Focus styles for accessibility */
 button:focus,
 input:focus,

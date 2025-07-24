@@ -91,7 +91,7 @@ export default function Navigation() {
               >
                 <button
                   onClick={() => router.push(item.path)}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                     activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
                   }`}
                 >
@@ -141,7 +141,7 @@ export default function Navigation() {
                       router.push(item.path)
                       setIsMobileMenuOpen(false)
                     }}
-                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                    className={`block px-3 py-2 text-base font-medium transition-colors focus:outline-none ${
                       activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
                     }`}
                   >
@@ -157,7 +157,7 @@ export default function Navigation() {
                             router.push(dropdownItem.path)
                             setIsMobileMenuOpen(false)
                           }}
-                          className="block px-3 py-2 text-sm text-blue-200 hover:text-white transition-colors"
+                          className="block px-3 py-2 text-sm text-blue-200 hover:text-white transition-colors focus:outline-none"
                         >
                           {dropdownItem.label}
                         </button>

@@ -8,7 +8,7 @@ interface PublicationsSectionProps {
 }
 
 export default function PublicationsSection({ initialCategory }: PublicationsSectionProps) {
-  const [selectedCategory, setSelectedCategory] = useState(initialCategory || "All")
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory || "Journal")
   const [selectedYear, setSelectedYear] = useState("All")
   const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
@@ -121,6 +121,8 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
   useEffect(() => {
     if (initialCategory && ["Journal", "Conference"].includes(initialCategory)) {
       setSelectedCategory(initialCategory)
+    } else {
+      setSelectedCategory("Journal")
     }
   }, [initialCategory])
 
