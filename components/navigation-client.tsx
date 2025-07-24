@@ -41,10 +41,8 @@ export default function Navigation() {
       label: "Publications", 
       path: "/publications",
       dropdown: [
-        { label: "해외학술지", path: "/publications?category=해외학술지" },
-        { label: "국내학술지", path: "/publications?category=국내학술지" },
-        { label: "해외학술대회", path: "/publications?category=해외학술대회" },
-        { label: "국내학술대회", path: "/publications?category=국내학술대회" },
+        { label: "Journal", path: "/publications?category=Journal" },
+        { label: "Conference", path: "/publications?category=Conference" },
       ]
     },
     { 

@@ -15,6 +15,7 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const categories = ["All", "해외학술지", "국내학술지", "해외학술대회", "국내학술대회"]
+  const categories = ["All", "Journal", "Conference"]
   const years = ["All", "2025", "2024", "2023", "2022", "2021", "2020", "2019"]
 
   const publications = {
@@ -116,7 +117,7 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
         image: "/placeholder.svg?height=200&width=150"
       }
     ],
-    "해외학술지": [
+    "Journal": [
       {
         id: 1,
         title: "Efficient Query Processing in Distributed Big Data Environments",
@@ -141,8 +142,6 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
         paperUrl: "https://dl.acm.org/doi/example",
         image: "/placeholder.svg?height=200&width=150"
       }
-    ],
-    "국내학술지": [
       {
         id: 3,
         title: "정보과학기술 분야의 혁신적 접근법에 관한 연구",
@@ -168,7 +167,7 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
         image: "/placeholder.svg?height=200&width=150"
       }
     ],
-    "해외학술대회": [
+    "Conference": [
       {
         id: 5,
         title: "Efficient Query Processing in Distributed Big Data Environments",
@@ -193,8 +192,6 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
         paperUrl: "https://dl.acm.org/conference/example",
         image: "/placeholder.svg?height=200&width=150"
       }
-    ],
-    "국내학술대회": [
       {
         id: 7,
         title: "AI 기반 데이터 분석 시스템 개발",
@@ -223,7 +220,7 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
   }
 
   useEffect(() => {
-    if (initialCategory && categories.includes(initialCategory)) {
+    if (initialCategory && ["All", "Journal", "Conference"].includes(initialCategory)) {
       setSelectedCategory(initialCategory)
     }
   }, [initialCategory])
