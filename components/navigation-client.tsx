@@ -49,8 +49,8 @@ export default function Navigation() {
       ]
     },
     { 
-      id: "research", 
-      label: "Research", 
+      id: "publications", 
+      label: "Publications", 
       path: "/publications",
       dropdown: [
         { label: "Projects", path: "/publications/projects" },
@@ -58,20 +58,11 @@ export default function Navigation() {
       ]
     },
     { 
-      id: "notice", 
-      label: "Notice", 
+      id: "board", 
+      label: "Board", 
       path: "/board",
       dropdown: [
         { label: "News", path: "/board/news" },
-      ]
-    },
-    { 
-      id: "gallery", 
-      label: "Gallery", 
-      path: "/board/gallery",
-      dropdown: [
-        { label: "Photo", path: "/board/gallery" },
-        { label: "Video", path: "/board/gallery" },
       ]
     },
     { 
@@ -93,7 +84,7 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="fixed top-0 w-full bg-blue-900 text-white z-50">
+    <nav className="fixed top-0 w-full bg-blue-900 text-white z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -123,21 +114,6 @@ export default function Navigation() {
                 >
                   {item.label}
                 </button>
-                
-                {/* Dropdown Menu */}
-                {item.dropdown && openDropdown === item.id && (
-                  <div className="absolute top-full left-0 w-48 bg-blue-800 shadow-lg py-2 z-50 animate-dropdown">
-                    {item.dropdown.map((dropdownItem, index) => (
-                      <button
-                        key={index}
-                        onClick={() => router.push(dropdownItem.path)}
-                        className="block w-full text-left px-4 py-3 text-sm text-blue-200 hover:text-white hover:bg-blue-700 transition-colors"
-                      >
-                        {dropdownItem.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -155,6 +131,39 @@ export default function Navigation() {
             </button>
           </div>
         </div>
+
+        {/* Full Width Dropdown Menu */}
+        {openDropdown && (
+          <div className="absolute left-0 right-0 top-full bg-blue-800 shadow-lg z-50 animate-dropdown">
+            <div className="max-w-7xl mx-auto px-4 py-6">
+              <div className="grid grid-cols-6 gap-8">
+                {menuItems.map((item) => (
+                  <div key={item.id} className="space-y-3">
+                    <h3 className="text-white font-semibold text-sm uppercase tracking-wide">
+                      {item.label}
+                    </h3>
+                    {item.dropdown && (
+                      <div className="space-y-2">
+                        {item.dropdown.map((dropdownItem, index) => (
+                          <button
+                            key={index}
+                            onClick={() => {
+                              router.push(dropdownItem.path)
+                              setOpenDropdown(null)
+                            }}
+                            className="block text-blue-200 hover:text-white transition-colors text-sm"
+                          >
+                            {dropdownItem.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
