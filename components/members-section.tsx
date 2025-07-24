@@ -5,7 +5,7 @@ export default function MembersSection() {
     name: "정동원",
     title: "Professor",
     image: "/placeholder.svg?height=300&width=240",
-    research: "정보과학기술, Database",
+    research: "데이터베이스, 모빌리티",
     email: "professor@kunsan.ac.kr",
     homepage: "https://sites.google.com/site/withimp/home/teaching?authuser=0",
   }
@@ -17,7 +17,7 @@ export default function MembersSection() {
         {
           name: "Master's Student",
           image: "/placeholder.svg?height=200&width=200",
-          research: "Data Science",
+          research: "데이터베이스 시스템",
           email: "masters@kunsan.ac.kr",
         },
       ],
@@ -28,7 +28,7 @@ export default function MembersSection() {
         {
           name: "Undergraduate Researcher",
           image: "/placeholder.svg?height=200&width=200",
-          research: "Software Development",
+          research: "모빌리티 데이터 분석",
           email: "undergrad@kunsan.ac.kr",
         },
       ],
