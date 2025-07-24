@@ -370,15 +370,6 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
                       rel="noopener noreferrer"
                       className="flex items-center bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
                     >
-                      <FileText className="w-4 h-4 mr-2" />
-                      Paper
-                    </a>
-                    <a
-                      href={pub.paperUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center border border-blue-700 text-blue-700 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors"
-                    >
                       <ExternalLink className="w-4 h-4 mr-2" />
                       Link
                     </a>
