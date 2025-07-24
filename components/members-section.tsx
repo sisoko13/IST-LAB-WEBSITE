@@ -10,47 +10,25 @@ export default function MembersSection() {
     research: "데이터베이스, 모빌리티",
     email: "professor@kunsan.ac.kr",
     homepage: "https://sites.google.com/site/withimp/home?authuser=0",
+    education: [
+      "Ph.D. in Computer Science, KAIST (2005)",
+      "M.S. in Computer Science, KAIST (2001)",
+      "B.S. in Computer Science, Seoul National University (1999)"
+    ],
+    career: [
+      "Professor, Kunsan National University (2010 - Present)",
+      "Associate Professor, Kunsan National University (2006 - 2010)",
+      "Assistant Professor, Kunsan National University (2005 - 2006)",
+      "Research Engineer, Samsung Electronics (2001 - 2005)"
+    ],
+    interests: [
+      "Database Systems",
+      "Big Data Processing",
+      "Smart Mobility Systems",
+      "IoT Data Management",
+      "Machine Learning for Databases"
+    ]
   }
-
-  const researchers = [
-    {
-      name: "박사과정 연구원",
-      image: "/placeholder.svg?height=200&width=200",
-      research: "데이터베이스 시스템",
-      email: "phd@kunsan.ac.kr",
-    },
-    {
-      name: "석사과정 연구원",
-      image: "/placeholder.svg?height=200&width=200",
-      research: "모빌리티 데이터 분석",
-      email: "masters@kunsan.ac.kr",
-    },
-    {
-      name: "학부 연구원",
-      image: "/placeholder.svg?height=200&width=200",
-      research: "AI 기반 데이터 분석",
-      email: "undergrad@kunsan.ac.kr",
-    },
-  ]
-
-  const graduates = [
-    {
-      name: "졸업생 1",
-      image: "/placeholder.svg?height=200&width=200",
-      research: "빅데이터 처리",
-      email: "graduate1@example.com",
-      graduation: "2023년 졸업",
-      currentPosition: "삼성전자 연구원",
-    },
-    {
-      name: "졸업생 2",
-      image: "/placeholder.svg?height=200&width=200",
-      research: "머신러닝",
-      email: "graduate2@example.com",
-      graduation: "2022년 졸업",
-      currentPosition: "네이버 개발자",
-    },
-  ]
 
   return (
     <section className="py-16 px-4">
@@ -61,29 +39,23 @@ export default function MembersSection() {
         </div>
 
         {/* Professor Section */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-blue-700 mb-8 text-center">Professor</h3>
-          <div className="flex justify-center">
-            <div className="bg-white rounded-lg shadow-xl p-10 max-w-md">
+        <div className="flex justify-center">
+          <div className="bg-white rounded-lg shadow-xl p-12 max-w-6xl w-full">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Left: Photo and Basic Info */}
               <div className="text-center">
-                <div className="w-56 h-72 mx-auto mb-8 overflow-hidden rounded-lg">
+                <div className="w-80 h-96 mx-auto mb-8 overflow-hidden rounded-lg">
                   <img
                     src={professor.image || "/placeholder.svg"}
                     alt={professor.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h4 className="text-3xl font-bold text-gray-800 mb-3">{professor.name}</h4>
-                <p className="text-blue-600 font-medium mb-6">{professor.title}</p>
-                <div className="space-y-3 text-base text-gray-600">
+                <h4 className="text-4xl font-bold text-gray-800 mb-4">{professor.name}</h4>
+                <p className="text-blue-600 font-medium text-xl mb-6">{professor.title}</p>
+                <div className="space-y-4 text-lg text-gray-600">
                   <div className="flex items-center justify-center">
-                    <GraduationCap className="w-5 h-5 mr-3" />
-                    <span>
-                      <strong>연구 분야:</strong> {professor.research}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <Mail className="w-5 h-5 mr-3" />
+                    <Mail className="w-6 h-6 mr-3" />
                     <span>{professor.email}</span>
                   </div>
                   <div className="flex items-center justify-center mt-6">
@@ -91,70 +63,53 @@ export default function MembersSection() {
                       href={professor.homepage}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition-colors text-base font-medium"
+                      className="bg-blue-700 text-white px-8 py-4 rounded-lg hover:bg-blue-800 transition-colors text-lg font-medium"
                     >
                       [홈페이지]
                     </a>
                   </div>
                 </div>
               </div>
+
+              {/* Right: Detailed Information */}
+              <div className="space-y-8">
+                {/* Education */}
+                <div>
+                  <h5 className="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                    <GraduationCap className="w-6 h-6 mr-3" />
+                    Education
+                  </h5>
+                  <div className="space-y-2">
+                    {professor.education.map((edu, index) => (
+                      <p key={index} className="text-gray-700 text-lg">{edu}</p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Career */}
+                <div>
+                  <h5 className="text-2xl font-bold text-blue-700 mb-4">Career</h5>
+                  <div className="space-y-2">
+                    {professor.career.map((career, index) => (
+                      <p key={index} className="text-gray-700 text-lg">{career}</p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Research Interests */}
+                <div>
+                  <h5 className="text-2xl font-bold text-blue-700 mb-4">Research Interests</h5>
+                  <div className="grid grid-cols-1 gap-2">
+                    {professor.interests.map((interest, index) => (
+                      <div key={index} className="flex items-center">
+                        <div className="w-2 h-2 bg-blue-700 rounded-full mr-3"></div>
+                        <p className="text-gray-700 text-lg">{interest}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        {/* Researchers Section */}
-        <div>
-          <h3 className="text-2xl font-bold text-blue-700 mb-8 text-center">Researchers</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {researchers.map((person, personIndex) => (
-              <div
-                key={personIndex}
-                className="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow"
-              >
-                <div className="w-32 h-32 mx-auto mb-6 overflow-hidden rounded-full">
-                  <img
-                    src={person.image || "/placeholder.svg"}
-                    alt={person.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h5 className="text-xl font-bold text-blue-700 mb-3">{person.name}</h5>
-                <p className="text-gray-600 mb-3">{person.research}</p>
-                <div className="flex items-center justify-center text-gray-600">
-                  <Mail className="w-5 h-5 mr-2" />
-                  <span>{person.email}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Graduates Section */}
-        <div>
-          <h3 className="text-2xl font-bold text-blue-700 mb-8 text-center">Alumni</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {graduates.map((person, personIndex) => (
-              <div
-                key={personIndex}
-                className="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow"
-              >
-                <div className="w-32 h-32 mx-auto mb-6 overflow-hidden rounded-full">
-                  <img
-                    src={person.image || "/placeholder.svg"}
-                    alt={person.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h5 className="text-xl font-bold text-blue-700 mb-3">{person.name}</h5>
-                <p className="text-gray-600 mb-2">{person.research}</p>
-                <p className="text-sm text-gray-500 mb-2">{person.graduation}</p>
-                <p className="text-sm text-blue-600 font-medium mb-3">{person.currentPosition}</p>
-                <div className="flex items-center justify-center text-gray-600">
-                  <Mail className="w-5 h-5 mr-2" />
-                  <span>{person.email}</span>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
