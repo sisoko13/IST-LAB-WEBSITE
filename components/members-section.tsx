@@ -7,7 +7,7 @@ export default function MembersSection() {
     image: "/placeholder.svg?height=300&width=240",
     research: "데이터베이스, 모빌리티",
     email: "professor@kunsan.ac.kr",
-    homepage: "https://sites.google.com/site/withimp/home/teaching?authuser=0",
+    homepage: "https://sites.google.com/site/withimp/home?authuser=0",
   }
 
   const members = [
