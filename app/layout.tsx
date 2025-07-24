@@ -1,21 +1,11 @@
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import './globals.css'
+import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
-
-const Navigation = dynamic(() => import('@/components/navigation'), {
-  ssr: false,
-})
 
 export const metadata: Metadata = {
   title: 'IST Lab - Information Science & Technology Laboratory',
   description: 'Kunsan National University IST Lab',
-}
-
-declare global {
-  interface Window {
-    naver: any;
-  }
 }
 
 export default function RootLayout({
