@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import dynamic from 'next/dynamic'
 import './globals.css'
-import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
+
+const Navigation = dynamic(() => import('@/components/navigation'), {
+  ssr: false,
+})
 
 export const metadata: Metadata = {
   title: 'IST Lab - Information Science & Technology Laboratory',
