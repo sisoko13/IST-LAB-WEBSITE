@@ -37,30 +37,30 @@ export default function ProfessorPage() {
         </div>
 
         <div className="flex justify-center">
-          <div className="bg-white rounded-lg shadow-xl p-16 w-full">
+          <div className="bg-white rounded-lg shadow-xl p-8 max-w-5xl w-full">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Left: Photo and Basic Info */}
               <div className="text-center">
-                <div className="w-96 h-[500px] mx-auto mb-8 overflow-hidden rounded-lg">
+                <div className="w-64 h-80 mx-auto mb-6 overflow-hidden rounded-lg">
                   <img
                     src={professor.image || "/placeholder.svg"}
                     alt={professor.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h4 className="text-5xl font-bold text-gray-800 mb-6">{professor.name}</h4>
-                <p className="text-blue-600 font-medium text-2xl mb-8">{professor.title}</p>
-                <div className="space-y-6 text-xl text-gray-600">
+                <h4 className="text-3xl font-bold text-gray-800 mb-4">{professor.name}</h4>
+                <p className="text-blue-600 font-medium text-xl mb-6">{professor.title}</p>
+                <div className="space-y-4 text-lg text-gray-600">
                   <div className="flex items-center justify-center">
-                    <Mail className="w-8 h-8 mr-4" />
+                    <Mail className="w-6 h-6 mr-3" />
                     <span>{professor.email}</span>
                   </div>
-                  <div className="flex items-center justify-center mt-8">
+                  <div className="flex items-center justify-center mt-6">
                     <a
                       href={professor.homepage}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-blue-700 text-white px-12 py-6 rounded-lg hover:bg-blue-800 transition-colors text-xl font-medium"
+                      className="bg-blue-700 text-white px-8 py-3 rounded-lg hover:bg-blue-800 transition-colors text-lg font-medium"
                     >
                       [홈페이지]
                     </a>
@@ -69,38 +69,38 @@ export default function ProfessorPage() {
               </div>
 
               {/* Right: Detailed Information */}
-              <div className="space-y-12">
+              <div className="space-y-8">
                 {/* Education */}
                 <div>
-                  <h5 className="text-3xl font-bold text-blue-700 mb-6 flex items-center">
-                    <GraduationCap className="w-8 h-8 mr-4" />
+                  <h5 className="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                    <GraduationCap className="w-6 h-6 mr-3" />
                     Education
                   </h5>
-                  <div className="space-y-4">
+                  <div className="space-y-2">
                     {professor.education.map((edu, index) => (
-                      <p key={index} className="text-gray-700 text-xl">{edu}</p>
+                      <p key={index} className="text-gray-700 text-lg">{edu}</p>
                     ))}
                   </div>
                 </div>
 
                 {/* Career */}
                 <div>
-                  <h5 className="text-3xl font-bold text-blue-700 mb-6">Career</h5>
-                  <div className="space-y-4">
+                  <h5 className="text-2xl font-bold text-blue-700 mb-4">Career</h5>
+                  <div className="space-y-2">
                     {professor.career.map((career, index) => (
-                      <p key={index} className="text-gray-700 text-xl">{career}</p>
+                      <p key={index} className="text-gray-700 text-lg">{career}</p>
                     ))}
                   </div>
                 </div>
 
                 {/* Research Interests */}
                 <div>
-                  <h5 className="text-3xl font-bold text-blue-700 mb-6">Research Interests</h5>
-                  <div className="grid grid-cols-1 gap-4">
+                  <h5 className="text-2xl font-bold text-blue-700 mb-4">Research Interests</h5>
+                  <div className="grid grid-cols-1 gap-2">
                     {professor.interests.map((interest, index) => (
                       <div key={index} className="flex items-center">
-                        <div className="w-3 h-3 bg-blue-700 rounded-full mr-4"></div>
-                        <p className="text-gray-700 text-xl">{interest}</p>
+                        <div className="w-2 h-2 bg-blue-700 rounded-full mr-3"></div>
+                        <p className="text-gray-700 text-lg">{interest}</p>
                       </div>
                     ))}
                   </div>
