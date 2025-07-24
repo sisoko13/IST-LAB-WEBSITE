@@ -110,35 +110,15 @@ export default function Navigation() {
                 {/* Dropdown Menu */}
                 {item.dropdown && openDropdown === item.id && (
                   <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                  <div key={item.id}>
-                    <button
-                      onClick={() => {
-                        router.push(item.path)
-                        setIsMobileMenuOpen(false)
-                      }}
-                      className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                        activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                    {/* Mobile Dropdown */}
-                    {item.dropdown && (
-                      <div className="ml-4 space-y-1">
-                        {item.dropdown.map((dropdownItem, index) => (
-                          <button
-                            key={index}
-                            onClick={() => {
-                              router.push(dropdownItem.path)
-                              setIsMobileMenuOpen(false)
-                            }}
-                            className="block px-3 py-2 text-sm text-blue-200 hover:text-white transition-colors"
-                          >
-                            {dropdownItem.label}
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                    {item.dropdown.map((dropdownItem, index) => (
+                      <button
+                        key={index}
+                        onClick={() => router.push(dropdownItem.path)}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                      >
+                        {dropdownItem.label}
+                      </button>
+                    ))}
                   </div>
                 )}
               </div>
@@ -164,18 +144,36 @@ export default function Navigation() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {menuItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    router.push(item.path)
-                    setIsMobileMenuOpen(false)
-                  }}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                    activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                </button>
+                <div key={item.id}>
+                  <button
+                    onClick={() => {
+                      router.push(item.path)
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                      activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                  {/* Mobile Dropdown */}
+                  {item.dropdown && (
+                    <div className="ml-4 space-y-1">
+                      {item.dropdown.map((dropdownItem, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            router.push(dropdownItem.path)
+                            setIsMobileMenuOpen(false)
+                          }}
+                          className="block px-3 py-2 text-sm text-blue-200 hover:text-white transition-colors"
+                        >
+                          {dropdownItem.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>
