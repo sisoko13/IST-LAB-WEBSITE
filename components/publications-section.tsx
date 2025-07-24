@@ -223,7 +223,7 @@ export default function PublicationsSection() {
     ? allPublications 
     : allPublications.filter(pub => pub.year === selectedYear)
 
-  const showYearFilter = selectedCategory === "해외학술지" || selectedCategory === "국내학술지" || selectedCategory === "해외학술대회" || selectedCategory === "국내학술대회"
+  const showYearFilter = true // 모든 카테고리에서 연도 필터 표시
 
   return (
     <section className="py-16 px-4 bg-gray-50">
