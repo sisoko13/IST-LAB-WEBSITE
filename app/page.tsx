@@ -1,5 +1,5 @@
-import ClientHomePage from "@/components/client-home-page"
+import HeroSection from "@/components/hero-section"
 
 export default function HomePage() {
-  return <ClientHomePage />
+  return <HeroSection />
 }
