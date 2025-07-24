@@ -10,112 +10,12 @@ interface PublicationsSectionProps {
 export default function PublicationsSection({ initialCategory }: PublicationsSectionProps) {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory || "All")
   const [selectedYear, setSelectedYear] = useState("All")
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
-  const categories = ["All", "해외학술지", "국내학술지", "해외학술대회", "국내학술대회"]
   const years = ["All", "2025", "2024", "2023", "2022", "2021", "2020", "2019"]
 
   const publications = {
-    "All": [
-      {
-        id: 1,
-        title: "Efficient Query Processing in Distributed Big Data Environments",
-        authors: "정동원, 박사과정 연구원",
-        venue: "IEEE Transactions on Knowledge and Data Engineering",
-        volume: "Vol. 35, No. 8",
-        pages: "pp. 1567-1580",
-        year: "2023",
-        doi: "10.1109/TKDE.2023.1234567",
-        paperUrl: "https://ieeexplore.ieee.org/document/example",
-        image: "/placeholder.svg?height=200&width=150"
-      },
-      {
-        id: 2,
-        title: "Machine Learning Approaches for Database Optimization",
-        authors: "박사과정 연구원, 정동원",
-        venue: "ACM Transactions on Database Systems",
-        volume: "Vol. 48, No. 3",
-        pages: "pp. 1-28",
-        year: "2023",
-        doi: "10.1145/3589334.3589335",
-        paperUrl: "https://dl.acm.org/doi/example",
-        image: "/placeholder.svg?height=200&width=150"
-      },
-      {
-        id: 3,
-        title: "정보과학기술 분야의 혁신적 접근법에 관한 연구",
-        authors: "정동원, 박사과정 연구원, 석사과정 연구원",
-        venue: "한국정보과학회 논문지",
-        volume: "Vol. 50, No. 12",
-        pages: "pp. 1234-1245",
-        year: "2024",
-        doi: "10.5626/KTCP.2024.50.12.1234",
-        paperUrl: "https://www.dbpia.co.kr/journal/example",
-        image: "/placeholder.svg?height=200&width=150"
-      },
-      {
-        id: 4,
-        title: "클라우드 환경에서의 분산 데이터 처리 최적화",
-        authors: "석사과정 연구원, 정동원",
-        venue: "정보처리학회논문지",
-        volume: "Vol. 12, No. 4",
-        pages: "pp. 156-167",
-        year: "2023",
-        doi: "10.3745/KTSDE.2023.12.4.156",
-        paperUrl: "https://www.kci.go.kr/kciportal/example",
-        image: "/placeholder.svg?height=200&width=150"
-      },
-      {
-        id: 5,
-        title: "Efficient Query Processing in Distributed Big Data Environments",
-        authors: "정동원, 박사과정 연구원",
-        venue: "IEEE International Conference on Data Engineering (ICDE 2024)",
-        location: "Utrecht, Netherlands",
-        date: "May 13-17, 2024",
-        year: "2024",
-        pages: "pp. 567-578",
-        paperUrl: "https://ieeexplore.ieee.org/conference/example",
-        image: "/placeholder.svg?height=200&width=150"
-      },
-      {
-        id: 6,
-        title: "Machine Learning Approaches for Database Optimization",
-        authors: "정동원, 박사과정 연구원, 석사과정 연구원",
-        venue: "ACM SIGMOD International Conference on Management of Data",
-        location: "Seattle, WA, USA",
-        date: "June 18-23, 2023",
-        year: "2023",
-        pages: "pp. 1456-1468",
-        paperUrl: "https://dl.acm.org/conference/example",
-        image: "/placeholder.svg?height=200&width=150"
-      },
-      {
-        id: 7,
-        title: "AI 기반 데이터 분석 시스템 개발",
-        authors: "박사과정 연구원, 정동원",
-        venue: "2024 한국컴퓨터종합학술대회 (KCC 2024)",
-        location: "제주국제컨벤션센터",
-        date: "2024년 6월 26-28일",
-        year: "2024",
-        pages: "pp. 1234-1236",
-        paperUrl: "https://www.kiise.or.kr/conference/example",
-        image: "/placeholder.svg?height=200&width=150"
-      },
-      {
-        id: 8,
-        title: "소프트웨어 품질 향상을 위한 새로운 방법론",
-        authors: "석사과정 연구원, 정동원",
-        venue: "2024 한국소프트웨어공학회 춘계학술대회",
-        location: "강원대학교",
-        date: "2024년 5월 23-24일",
-        year: "2024",
-        pages: "pp. 89-92",
-        paperUrl: "https://www.kiise.or.kr/conference/example",
-        image: "/placeholder.svg?height=200&width=150"
-      }
-    ],
     "Journal": [
       {
         id: 1,
@@ -219,7 +119,7 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
   }
 
   useEffect(() => {
-    if (initialCategory && ["All", "Journal", "Conference"].includes(initialCategory)) {
+    if (initialCategory && ["Journal", "Conference"].includes(initialCategory)) {
       setSelectedCategory(initialCategory)
     }
   }, [initialCategory])
@@ -228,8 +128,6 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
   const currentPublications = selectedYear === "All" 
     ? allPublications 
     : allPublications.filter(pub => pub.year === selectedYear)
-
-  const showYearFilter = true // 모든 카테고리에서 연도 필터 표시
 
   return (
     <section className="py-16 px-4 bg-gray-50">
@@ -242,40 +140,42 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
           </p>
         </div>
 
-        {/* Category and Year Dropdowns */}
-        <div className="mb-8 flex justify-center gap-4">
-          <div className="relative">
-            <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center bg-white border border-gray-300 rounded-lg px-6 py-3 text-lg font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-48"
-            >
-              {selectedCategory}
-              <ChevronDown className={`ml-2 w-5 h-5 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
-            </button>
-            
-            {isDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    onClick={() => {
-                      setSelectedCategory(category)
-                      setIsDropdownOpen(false)
-                      setSelectedYear("All") // Reset year when category changes
-                    }}
-                    className={`w-full text-left px-6 py-3 hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg ${
-                      selectedCategory === category ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700'
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-            )}
+        {/* Category Tabs and Year Filter */}
+        <div className="mb-8">
+          {/* Category Tabs */}
+          <div className="flex justify-center mb-4">
+            <div className="bg-white rounded-lg border border-gray-300 p-1">
+              <button
+                onClick={() => {
+                  setSelectedCategory("Journal")
+                  setSelectedYear("All")
+                }}
+                className={`px-6 py-2 rounded-md font-medium transition-colors ${
+                  selectedCategory === "Journal" 
+                    ? "bg-blue-700 text-white" 
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                Journal
+              </button>
+              <button
+                onClick={() => {
+                  setSelectedCategory("Conference")
+                  setSelectedYear("All")
+                }}
+                className={`px-6 py-2 rounded-md font-medium transition-colors ${
+                  selectedCategory === "Conference" 
+                    ? "bg-blue-700 text-white" 
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                Conference
+              </button>
+            </div>
           </div>
 
-          {/* Year Dropdown - only show for specific categories */}
-          {showYearFilter && (
+          {/* Year Filter */}
+          <div className="flex justify-center">
             <div className="relative">
               <button
                 onClick={() => setIsYearDropdownOpen(!isYearDropdownOpen)}
@@ -304,7 +204,7 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
                 </div>
               )}
             </div>
-          )}
+          </div>
         </div>
 
         {/* Publications List */}
