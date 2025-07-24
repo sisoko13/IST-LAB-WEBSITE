@@ -61,9 +61,9 @@ export default function Navigation() {
   return (
     <nav className="fixed top-0 w-full bg-blue-900 text-white z-50">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex items-center justify-between h-16 w-full">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center flex-shrink-0">
             <button
               className="text-xl font-bold hover:text-blue-300 transition-colors focus:outline-none"
               onClick={() => router.push("/")}
@@ -73,7 +73,7 @@ export default function Navigation() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8 flex-1 justify-center">
             {menuItems.map((item) => (
               <div
                 key={item.id}
@@ -94,7 +94,7 @@ export default function Navigation() {
           </div>
 
           {/* University Info */}
-          <div className="hidden md:block text-right">
+          <div className="hidden md:block text-right flex-shrink-0">
             <div className="text-sm">Kunsan National University</div>
             <div className="text-xs opacity-80">Software Department</div>
           </div>
@@ -108,33 +108,35 @@ export default function Navigation() {
         </div>
 
         {/* Full Width Dropdown Menu */}
-        {openDropdown && (
+        {openDropdown === 'board' && (
           <div className="absolute left-0 right-0 top-full bg-blue-800 z-50 animate-dropdown">
             <div className="max-w-7xl mx-auto px-4 py-6">
-              <div className="grid grid-cols-6 gap-8">
-                {menuItems.map((item) => (
-                  <div key={item.id} className="space-y-3">
-                    <h3 className="text-white font-semibold text-sm uppercase tracking-wide">
-                      {item.label}
-                    </h3>
-                    {item.dropdown && (
-                      <div className="space-y-2">
-                        {item.dropdown.map((dropdownItem, index) => (
-                          <button
-                            key={index}
-                            onClick={() => {
-                              router.push(dropdownItem.path)
-                              setOpenDropdown(null)
-                            }}
-                            className="block text-blue-200 hover:text-white transition-colors text-sm focus:outline-none"
-                          >
-                            {dropdownItem.label}
-                          </button>
-                        ))}
-                      </div>
-                    )}
+              <div className="flex space-x-8">
+                <div className="space-y-3">
+                  <h3 className="text-white font-semibold text-sm uppercase tracking-wide">
+                    BOARD
+                  </h3>
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => {
+                        router.push('/board/news')
+                        setOpenDropdown(null)
+                      }}
+                      className="block text-blue-200 hover:text-white transition-colors text-sm focus:outline-none"
+                    >
+                      News
+                    </button>
+                    <button
+                      onClick={() => {
+                        router.push('/board/gallery')
+                        setOpenDropdown(null)
+                      }}
+                      className="block text-blue-200 hover:text-white transition-colors text-sm focus:outline-none"
+                    >
+                      Gallery
+                    </button>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </div>
