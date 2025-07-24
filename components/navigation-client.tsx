@@ -26,18 +26,7 @@ export default function Navigation() {
   
   const menuItems = [
     { id: "home", label: "Home", path: "/" },
-    { 
-      id: "about", 
-      label: "About", 
-      path: "/about",
-      dropdown: [
-        { label: "인사말", path: "/about" },
-        { label: "비전 및 연혁", path: "/about" },
-        { label: "Research Areas", path: "/about" },
-        { label: "Career Map", path: "/about" },
-        { label: "Lectures", path: "/about" },
-      ]
-    },
+    { id: "about", label: "About", path: "/about" },
     { 
       id: "members", 
       label: "Members", 
@@ -48,31 +37,17 @@ export default function Navigation() {
         { label: "IST Alumni", path: "/members/graduates" },
       ]
     },
-    { 
-      id: "publications", 
-      label: "Publications", 
-      path: "/publications",
-      dropdown: [
-        { label: "Projects", path: "/publications/projects" },
-        { label: "Publications", path: "/publications" },
-      ]
-    },
+    { id: "publications", label: "Publications", path: "/publications" },
     { 
       id: "board", 
       label: "Board", 
       path: "/board",
       dropdown: [
         { label: "News", path: "/board/news" },
-      ]
-    },
-    { 
-      id: "contact", 
-      label: "Contact", 
-      path: "/contact",
-      dropdown: [
         { label: "Gallery", path: "/board/gallery" },
       ]
     },
+    { id: "contact", label: "Contact", path: "/contact" },
   ]
 
   const handleMouseEnter = (itemId: string) => {
@@ -108,7 +83,7 @@ export default function Navigation() {
               >
                 <button
                   onClick={() => router.push(item.path)}
-                  className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
+                  className={`px-3 py-2 text-lg font-bold transition-colors focus:outline-none ${
                     activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
                   }`}
                 >
@@ -176,7 +151,7 @@ export default function Navigation() {
                       router.push(item.path)
                       setIsMobileMenuOpen(false)
                     }}
-                    className={`block px-3 py-2 text-base font-medium transition-colors focus:outline-none ${
+                    className={`block px-3 py-2 text-lg font-bold transition-colors focus:outline-none ${
                       activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
                     }`}
                   >
