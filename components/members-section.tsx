@@ -159,13 +159,3 @@ export default function MembersSection() {
     </section>
   )
 }
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
