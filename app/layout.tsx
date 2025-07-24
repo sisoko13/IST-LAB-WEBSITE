@@ -1,10 +1,18 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
+import Navigation from '@/components/navigation'
+import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'IST Lab - Information Science & Technology Laboratory',
+  description: 'Kunsan National University IST Lab',
+}
+
+declare global {
+  interface Window {
+    naver: any;
+  }
 }
 
 export default function RootLayout({
@@ -14,7 +22,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <Script
+          src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID"
+          strategy="beforeInteractive"
+        />
+      </head>
+      <body>
+        <Navigation />
+        <main className="pt-16">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   )
 }

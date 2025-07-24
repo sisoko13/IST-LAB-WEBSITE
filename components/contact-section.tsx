@@ -2,8 +2,40 @@
 
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 
 export default function ContactSection() {
+  const mapRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const initMap = () => {
+      if (window.naver && window.naver.maps && mapRef.current) {
+        const location = new window.naver.maps.LatLng(35.9676, 126.7370) // 군산대학교 좌표
+        
+        const map = new window.naver.maps.Map(mapRef.current, {
+          center: location,
+          zoom: 16,
+          mapTypeControl: true
+        })
+
+        new window.naver.maps.Marker({
+          position: location,
+          map: map,
+          title: 'IST Lab - 군산대학교'
+        })
+      }
+    }
+
+    // 네이버 지도 API 스크립트 로드
+    if (!window.naver) {
+      const script = document.createElement('script')
+      script.src = 'https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID'
+      script.onload = initMap
+      document.head.appendChild(script)
+    } else {
+      initMap()
+    }
+  }, [])
 
   return (
     <>
@@ -70,12 +102,12 @@ export default function ContactSection() {
 
                 {/* 지도 영역 (단순 표시) */}
                 <div className="mt-8">
-                  <div className="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <div className="text-center text-gray-600">
-                      <MapPin className="w-12 h-12 mx-auto mb-2" />
-                      <p className="font-semibold">IST 연구실</p>
-                      <p className="text-sm">디지털정보관 1층 151-107</p>
-                    </div>
+                  <div 
+                    ref={mapRef}
+                    className="w-full h-96 bg-gray-200 rounded-lg"
+                    style={{ minHeight: '384px' }}
+                  >
+                    {/* 네이버 지도가 여기에 로드됩니다 */}
                   </div>
                 </div>
               </div>
