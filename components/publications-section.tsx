@@ -3,8 +3,12 @@
 import { useState } from "react"
 import { ChevronDown, ExternalLink, FileText, X } from "lucide-react"
 
-export default function PublicationsSection() {
-  const [selectedCategory, setSelectedCategory] = useState("해외학술지")
+interface PublicationsSectionProps {
+  initialCategory?: string | null
+}
+
+export default function PublicationsSection({ initialCategory }: PublicationsSectionProps) {
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory || "All")
   const [selectedYear, setSelectedYear] = useState("All")
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false)
@@ -217,6 +221,12 @@ export default function PublicationsSection() {
       }
     ]
   }
+
+  useEffect(() => {
+    if (initialCategory && categories.includes(initialCategory)) {
+      setSelectedCategory(initialCategory)
+    }
+  }, [initialCategory])
 
   const allPublications = publications[selectedCategory] || []
   const currentPublications = selectedYear === "All" 

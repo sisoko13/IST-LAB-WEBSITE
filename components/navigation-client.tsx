@@ -26,24 +26,7 @@ export default function Navigation() {
   
   const menuItems = [
     { id: "home", label: "Home", path: "/" },
-    { 
-      id: "about", 
-      label: "About", 
-      path: "/about",
-      dropdown: [
-        { label: "Lab Info", path: "/about" },
-        { label: "Research Areas", path: "/about#research" },
-      ]
-    },
-    { 
-      id: "board", 
-      label: "Board", 
-      path: "/board",
-      dropdown: [
-        { label: "News", path: "/board/news" },
-        { label: "Gallery", path: "/board/gallery" },
-      ]
-    },
+    { id: "about", label: "About", path: "/about" },
     { 
       id: "members", 
       label: "Members", 
@@ -58,10 +41,19 @@ export default function Navigation() {
       label: "Publications", 
       path: "/publications",
       dropdown: [
-        { label: "Journal Papers", path: "/publications/journal" },
-        { label: "Conference Papers", path: "/publications/conference" },
-        { label: "Patents", path: "/publications/patents" },
-        { label: "Projects", path: "/publications/projects" },
+        { label: "해외학술지", path: "/publications?category=해외학술지" },
+        { label: "국내학술지", path: "/publications?category=국내학술지" },
+        { label: "해외학술대회", path: "/publications?category=해외학술대회" },
+        { label: "국내학술대회", path: "/publications?category=국내학술대회" },
+      ]
+    },
+    { 
+      id: "board", 
+      label: "Board", 
+      path: "/board",
+      dropdown: [
+        { label: "News", path: "/board/news" },
+        { label: "Gallery", path: "/board/gallery" },
       ]
     },
     { id: "contact", label: "Contact", path: "/contact" },
