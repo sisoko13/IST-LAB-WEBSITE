@@ -2,15 +2,26 @@
 
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
 
-interface NavigationProps {
-  activeSection: string
-  setActiveSection: (section: string) => void
-}
-
-export default function Navigation({ activeSection, setActiveSection }: NavigationProps) {
+export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
+  const pathname = usePathname()
+  const router = useRouter()
+
+  // 현재 경로를 기반으로 활성 섹션 결정
+  const getActiveSection = () => {
+    if (pathname === '/') return 'home'
+    if (pathname.startsWith('/about')) return 'about'
+    if (pathname.startsWith('/news')) return 'news'
+    if (pathname.startsWith('/members')) return 'members'
+    if (pathname.startsWith('/publications')) return 'publications'
+    if (pathname.startsWith('/contact')) return 'contact'
+    return 'home'
+  }
+
+  const activeSection = getActiveSection()
   const menuItems = [
     { id: "home", label: "Home" },
     { id: "about", label: "About" },
@@ -27,7 +38,6 @@ export default function Navigation({ activeSection, setActiveSection }: Navigati
           {/* Logo */}
           <div className="flex items-center">
             <button
-              onClick={() => setActiveSection("home")} 
               className="text-xl font-bold hover:text-blue-300 transition-colors"
             >
               IST Lab
@@ -43,7 +53,6 @@ export default function Navigation({ activeSection, setActiveSection }: Navigati
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
                 }`}
-              >
                 {item.label}
               </button>
             ))}
@@ -74,7 +83,6 @@ export default function Navigation({ activeSection, setActiveSection }: Navigati
                     setActiveSection(item.id)
                     setIsMobileMenuOpen(false)
                   }}
-                  className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left ${
                     activeSection === item.id ? "text-white font-bold" : "text-blue-300 hover:text-white"
                   }`}
                 >
