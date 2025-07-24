@@ -106,6 +106,7 @@ export default function MembersSection() {
                       />
                     </div>
                     <h5 className="text-xl font-bold text-blue-700 mb-3">{person.name}</h5>
+                    <h5 className="text-xl font-bold text-gray-800 mb-3">{person.name}</h5>
                     <div className="flex items-center justify-center text-gray-600">
                       <Mail className="w-5 h-5 mr-2" />
                       <span>{person.email}</span>
