@@ -135,9 +135,6 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-blue-700 mb-4">Publications</h2>
           <div className="w-24 h-1 bg-blue-700 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            IST Lab에서 발표한 논문과 연구 성과를 소개합니다.
-          </p>
         </div>
 
         {/* Category Tabs and Year Filter */}
