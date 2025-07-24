@@ -89,6 +89,26 @@ export default function Navigation() {
                 >
                   {item.label}
                 </button>
+                
+                {/* Dropdown Menu */}
+                {item.dropdown && openDropdown === item.id && (
+                  <div className="absolute top-full left-0 mt-0 bg-blue-800 rounded-b-lg shadow-lg z-50 animate-dropdown min-w-40">
+                    <div className="py-2">
+                      {item.dropdown.map((dropdownItem, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            router.push(dropdownItem.path)
+                            setOpenDropdown(null)
+                          }}
+                          className="block w-full text-left px-4 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 transition-colors focus:outline-none"
+                        >
+                          {dropdownItem.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -107,40 +127,6 @@ export default function Navigation() {
           </div>
         </div>
 
-        {/* Full Width Dropdown Menu */}
-        {openDropdown === 'board' && (
-          <div className="absolute left-0 right-0 top-16 bg-blue-800 z-50 animate-dropdown shadow-lg">
-            <div className="max-w-7xl mx-auto px-4 py-6">
-              <div className="flex space-x-8">
-                <div className="space-y-3">
-                  <h3 className="text-white font-semibold text-sm uppercase tracking-wide">
-                    BOARD
-                  </h3>
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => {
-                        router.push('/board/news')
-                        setOpenDropdown(null)
-                      }}
-                      className="block text-blue-200 hover:text-white transition-colors text-sm focus:outline-none"
-                    >
-                      News
-                    </button>
-                    <button
-                      onClick={() => {
-                        router.push('/board/gallery')
-                        setOpenDropdown(null)
-                      }}
-                      className="block text-blue-200 hover:text-white transition-colors text-sm focus:outline-none"
-                    >
-                      Gallery
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
