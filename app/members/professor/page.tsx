@@ -1,4 +1,5 @@
 import { Mail, GraduationCap } from "lucide-react"
+import { User } from "lucide-react"
 
 export default function ProfessorPage() {
   const professor = {
@@ -41,12 +42,8 @@ export default function ProfessorPage() {
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Left: Photo and Basic Info */}
               <div className="text-center">
-                <div className="w-64 h-80 mx-auto mb-6 overflow-hidden rounded-lg">
-                  <img
-                    src={professor.image || "/placeholder.svg"}
-                    alt={professor.name}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="w-64 h-64 mx-auto mb-6 bg-gray-200 rounded-full flex items-center justify-center">
+                  <User className="w-32 h-32 text-gray-400" />
                 </div>
                 <h4 className="text-3xl font-bold text-gray-800 mb-4">{professor.name}</h4>
                 <p className="text-blue-600 font-medium text-xl mb-6">{professor.title}</p>
