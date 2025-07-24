@@ -140,7 +140,7 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
         doi: "10.1145/3589334.3589335",
         paperUrl: "https://dl.acm.org/doi/example",
         image: "/placeholder.svg?height=200&width=150"
-      }
+      },
       {
         id: 3,
         title: "정보과학기술 분야의 혁신적 접근법에 관한 연구",
@@ -190,7 +190,7 @@ export default function PublicationsSection({ initialCategory }: PublicationsSec
         pages: "pp. 1456-1468",
         paperUrl: "https://dl.acm.org/conference/example",
         image: "/placeholder.svg?height=200&width=150"
-      }
+      },
       {
         id: 7,
         title: "AI 기반 데이터 분석 시스템 개발",
